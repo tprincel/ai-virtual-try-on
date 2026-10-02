@@ -1,0 +1,8 @@
+{
+  "name": "ai-virtual-try-on",
+  "version": "0.1.0",
+  "description": "Interactive AI-powered 3D virtual try-on web application.",
+  "main": "index.html",
+  "author": "Princel Tixeira <princetixeira@gmail.com>",
+  "license": "MIT"
+}
