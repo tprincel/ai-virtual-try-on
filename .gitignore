@@ -1,0 +1,12 @@
+# System & Editor files
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+
+# Dependencies
+node_modules/
+
+# Local backups
+.git_backup/
