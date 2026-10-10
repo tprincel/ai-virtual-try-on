@@ -4,8 +4,15 @@
 		<title>AI 3D Virtual Try-On</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="./css/style.css">
 	</head>
 	<body ontouchstart="">
+		<div id="loading-overlay">
+			<div class="spinner"></div>
+			<div class="loading-title">Loading 3D Scene...</div>
+			<div class="loading-subtitle">Initializing avatar meshes and garment shaders</div>
+		</div>
+
 		<script src="./js/HelioWebXRPolyfill.js"></script>
 
 		<script type="module">
@@ -23,6 +30,11 @@
 				player.setSize( window.innerWidth, window.innerHeight );
 				player.play();
 				document.body.appendChild( player.dom );
+
+				var overlay = document.getElementById( 'loading-overlay' );
+				if ( overlay ) {
+					overlay.classList.add( 'hidden' );
+				}
 			} );
 		</script>
 	</body>
