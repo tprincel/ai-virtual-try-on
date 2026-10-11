@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>AI 3D Virtual Try-On</title>
+		<title>AI 3D Virtual Try-On | Interactive Fashion Simulation</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<link rel="stylesheet" href="./css/style.css">
 	</head>
 	<body ontouchstart="">
+		<!-- Loading Screen HUD -->
 		<div id="loading-overlay">
 			<div class="spinner"></div>
 			<div class="loading-title">Loading 3D Scene...</div>
@@ -20,21 +21,29 @@
 			import { APP } from './js/app.js';
 			import { VRButton } from './js/VRButton.js';
 
-			window.THREE = THREE;
-			window.VRButton = VRButton;
+			window.THREE = THREE; // Used by APP Scripts.
+			window.VRButton = VRButton; // Used by APP Scripts.
 
 			var loader = new THREE.FileLoader();
 			loader.load( 'app.json', function ( text ) {
+
 				var player = new APP.Player();
 				player.load( JSON.parse( text ) );
 				player.setSize( window.innerWidth, window.innerHeight );
 				player.play();
+
 				document.body.appendChild( player.dom );
 
+				// Hide loading screen once 3D assets are loaded into WebGL
 				var overlay = document.getElementById( 'loading-overlay' );
 				if ( overlay ) {
 					overlay.classList.add( 'hidden' );
 				}
+
+				window.addEventListener( 'resize', function () {
+					player.setSize( window.innerWidth, window.innerHeight );
+				} );
+
 			} );
 		</script>
 	</body>
