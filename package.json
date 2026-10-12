@@ -1,8 +1,20 @@
 {
   "name": "ai-virtual-try-on",
-  "version": "0.1.0",
-  "description": "Interactive AI-powered 3D virtual try-on web application.",
+  "version": "0.9.0",
+  "description": "Interactive AI-powered 3D virtual try-on web application for real-time garment fitting.",
   "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "serve": "npx serve -l 8000",
+    "dev": "python -m http.server 8000"
+  },
+  "keywords": [
+    "ai",
+    "virtual-try-on",
+    "threejs",
+    "3d",
+    "webgl"
+  ],
   "author": "Princel Tixeira <princetixeira@gmail.com>",
   "license": "MIT"
 }
