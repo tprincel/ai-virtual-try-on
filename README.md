@@ -9,12 +9,6 @@ An interactive, browser-based **AI 3D Virtual Try-On** application engineered wi
 
 ---
 
-## 📸 Preview
-
-![AI 3D Virtual Try-On Showcase](./virtual-try-on.jpg)
-
----
-
 ## 🌟 Key Features
 
 - **Real-Time 3D Fitting**: High-fidelity 3D garment rendering with realistic lighting, shadows, and fabric textures.
@@ -96,7 +90,6 @@ ai-virtual-try-on/
 ├── app.json                 # 3D avatar, garment geometries, materials & lights (~75MB)
 ├── index.html               # Main application entry point and WebGL canvas
 ├── package.json             # Project metadata, keywords, and launch scripts
-├── virtual-try-on.jpg       # Demonstration preview screenshot
 ├── .gitignore               # Ignored system and local files
 ├── LICENSE                  # MIT License
 └── README.md                # Project documentation and guide
