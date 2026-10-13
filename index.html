@@ -14,6 +14,18 @@
 			<div class="loading-subtitle">Initializing avatar meshes and garment shaders</div>
 		</div>
 
+		<!-- Interactive Garment Color Controls -->
+		<div id="controls-panel">
+			<span class="control-label">👕 Shirt Color:</span>
+			<button class="color-btn active" data-color="0x2563eb" style="background: #2563eb;" title="Royal Blue"></button>
+			<button class="color-btn" data-color="0xd92638" style="background: #d92638;" title="Crimson Red"></button>
+			<button class="color-btn" data-color="0x059669" style="background: #059669;" title="Emerald Green"></button>
+			<button class="color-btn" data-color="0x7c3aed" style="background: #7c3aed;" title="Deep Purple"></button>
+			<button class="color-btn" data-color="0x0284c7" style="background: #0284c7;" title="Cyan / Sky Blue"></button>
+			<button class="color-btn" data-color="0xd97706" style="background: #d97706;" title="Warm Amber"></button>
+			<button class="color-btn" data-color="0xffffff" style="background: #ffffff;" title="Original White"></button>
+		</div>
+
 		<script src="./js/HelioWebXRPolyfill.js"></script>
 
 		<script type="module">
@@ -39,6 +51,22 @@
 				if ( overlay ) {
 					overlay.classList.add( 'hidden' );
 				}
+
+				// Interactive garment color switcher
+				var colorBtns = document.querySelectorAll( '.color-btn' );
+				colorBtns.forEach( function ( btn ) {
+					btn.addEventListener( 'click', function () {
+						colorBtns.forEach( function ( b ) { b.classList.remove( 'active' ); } );
+						btn.classList.add( 'active' );
+						var hex = parseInt( btn.getAttribute( 'data-color' ), 16 );
+						var tshirt = player.scene.getObjectByName( 'tshirt1' );
+						if ( tshirt && tshirt.material ) {
+							tshirt.material.emissive.setHex( hex );
+							tshirt.material.color.setHex( hex );
+							tshirt.material.needsUpdate = true;
+						}
+					} );
+				} );
 
 				window.addEventListener( 'resize', function () {
 					player.setSize( window.innerWidth, window.innerHeight );
