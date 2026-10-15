@@ -161,6 +161,43 @@ export const GARMENTS = [
     }
   },
   {
+    id: 'compression-tee',
+    name: 'Athletic Dry-Fit Training Tee',
+    category: 'tops',
+    layerOrder: 30,
+    price: '$36',
+    defaultColor: '#0f172a',
+    availableColors: ['#0f172a', '#1e40af', '#dc2626', '#eab308', '#f8fafc', '#15803d'],
+    render: (color, fit = 'regular') => {
+      const wMod = fit === 'slim' ? -5 : (fit === 'oversized' ? 5 : -1);
+      return `
+        <g id="garment-compression-tee" class="garment-group">
+          <!-- Athletic Fitted Torso -->
+          <path d="M 174 116 
+                   C 186 128, 214 128, 226 116
+                   L ${276 + wMod} 136
+                   L ${258 + wMod} 198
+                   L ${244 + wMod} 188
+                   L ${246 + wMod} 272
+                   C 230 276, 170 276, ${154 - wMod} 272
+                   L ${156 - wMod} 188
+                   L ${142 - wMod} 198
+                   L ${124 - wMod} 136
+                   Z" 
+                fill="${color}" stroke="rgba(0,0,0,0.25)" stroke-width="1.5" />
+          
+          <!-- Ergonomic Raglan Seam Curves -->
+          <path d="M 174 116 Q 165 155, ${156 - wMod} 188" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
+          <path d="M 226 116 Q 235 155, ${244 + wMod} 188" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
+          
+          <!-- Chest Reflective Wing Accent -->
+          <polygon points="195,150 205,150 200,154" fill="#38bdf8" />
+          <circle cx="200" cy="146" r="1.5" fill="#38bdf8" />
+        </g>
+      `;
+    }
+  },
+  {
     id: 'oxford-shirt',
     name: 'Tailored Oxford Button-Down',
     category: 'tops',
