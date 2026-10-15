@@ -87,6 +87,46 @@ export const GARMENTS = [
     }
   },
   {
+    id: 'striped-tee',
+    name: 'Oversized Striped Skater Tee',
+    category: 'tops',
+    layerOrder: 30,
+    price: '$32',
+    defaultColor: '#1e3a8a',
+    availableColors: ['#1e3a8a', '#18181b', '#065f46', '#991b1b', '#374151'],
+    render: (color, fit = 'regular') => {
+      const wMod = fit === 'slim' ? -2 : (fit === 'oversized' ? 9 : 3);
+      const lMod = fit === 'slim' ? -2 : (fit === 'oversized' ? 8 : 2);
+      return `
+        <g id="garment-striped-tee" class="garment-group">
+          <!-- Torso Base -->
+          <path d="M ${172 - wMod * 0.5} 115 
+                   C 185 132, 215 132, ${228 + wMod * 0.5} 115
+                   L ${280 + wMod} 135
+                   L ${262 + wMod} 205
+                   L ${245 + wMod} 195
+                   L ${248 + wMod} ${278 + lMod}
+                   C 230 ${283 + lMod}, 170 ${283 + lMod}, ${152 - wMod} ${278 + lMod}
+                   L ${155 - wMod} 195
+                   L ${138 - wMod} 205
+                   L ${120 - wMod} 135
+                   Z" 
+                fill="${color}" stroke="rgba(0,0,0,0.2)" stroke-width="1.5" />
+          
+          <!-- Contrast White Horizontal Stripes -->
+          <line x1="${160 - wMod}" y1="150" x2="${240 + wMod}" y2="150" stroke="#ffffff" stroke-width="6" stroke-opacity="0.8" />
+          <line x1="${155 - wMod}" y1="175" x2="${245 + wMod}" y2="175" stroke="#ffffff" stroke-width="6" stroke-opacity="0.8" />
+          <line x1="${153 - wMod}" y1="200" x2="${247 + wMod}" y2="200" stroke="#ffffff" stroke-width="6" stroke-opacity="0.8" />
+          <line x1="${152 - wMod}" y1="225" x2="${248 + wMod}" y2="225" stroke="#ffffff" stroke-width="6" stroke-opacity="0.8" />
+          <line x1="${152 - wMod}" y1="250" x2="${248 + wMod}" y2="250" stroke="#ffffff" stroke-width="6" stroke-opacity="0.8" />
+
+          <!-- Solid Crewneck Rib -->
+          <path d="M 172 115 C 185 134, 215 134, 228 115" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" />
+        </g>
+      `;
+    }
+  },
+  {
     id: 'oxford-shirt',
     name: 'Tailored Oxford Button-Down',
     category: 'tops',
