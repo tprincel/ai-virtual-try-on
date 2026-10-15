@@ -49,6 +49,44 @@ export const GARMENTS = [
     }
   },
   {
+    id: 'graphic-tee',
+    name: 'Vintage Graphic Rock Tee',
+    category: 'tops',
+    layerOrder: 30,
+    price: '$34',
+    defaultColor: '#18181b',
+    availableColors: ['#18181b', '#3f3f46', '#f8fafc', '#7f1d1d', '#14532d', '#ea580c', '#4338ca'],
+    render: (color, fit = 'regular') => {
+      const wMod = fit === 'slim' ? -3 : (fit === 'oversized' ? 8 : 1);
+      const lMod = fit === 'slim' ? -2 : (fit === 'oversized' ? 7 : 1);
+      return `
+        <g id="garment-graphic-tee" class="garment-group">
+          <!-- Main Torso -->
+          <path d="M ${172 - wMod * 0.5} 115 
+                   C 185 132, 215 132, ${228 + wMod * 0.5} 115
+                   L ${278 + wMod} 135
+                   L ${260 + wMod} 200
+                   L ${245 + wMod} 190
+                   L ${248 + wMod} ${275 + lMod}
+                   C 230 ${280 + lMod}, 170 ${280 + lMod}, ${152 - wMod} ${275 + lMod}
+                   L ${155 - wMod} 190
+                   L ${140 - wMod} 200
+                   L ${122 - wMod} 135
+                   Z" 
+                fill="${color}" stroke="rgba(0,0,0,0.2)" stroke-width="1.5" />
+          
+          <!-- Distressed Ribbed Collar -->
+          <path d="M 172 115 C 185 134, 215 134, 228 115" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="3" stroke-linecap="round" />
+          
+          <!-- Vintage Center Graphic Emblem -->
+          <circle cx="200" cy="188" r="22" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3,2" />
+          <polygon points="200,172 205,183 216,183 207,190 210,201 200,194 190,201 193,190 184,183 195,183" fill="#f59e0b" opacity="0.9" />
+          <text x="200" y="222" font-family="-apple-system, sans-serif" font-weight="900" font-size="8" fill="#e2e8f0" text-anchor="middle" letter-spacing="2">NOVA STUDIO</text>
+        </g>
+      `;
+    }
+  },
+  {
     id: 'oxford-shirt',
     name: 'Tailored Oxford Button-Down',
     category: 'tops',
