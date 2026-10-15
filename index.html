@@ -1,78 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>AI 3D Virtual Try-On | Interactive Fashion Simulation</title>
+		<title>AI 2D Virtual Try-On Studio | Precision Garment Fitting</title>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="description" content="Interactive 2D Virtual Try-On Studio for real-time garment fitting, custom colorways, and anatomical fashion simulation.">
 		<link rel="stylesheet" href="./css/style.css">
 	</head>
-	<body ontouchstart="">
-		<!-- Loading Screen HUD -->
-		<div id="loading-overlay">
-			<div class="spinner"></div>
-			<div class="loading-title">Loading 3D Scene...</div>
-			<div class="loading-subtitle">Initializing avatar meshes and garment shaders</div>
+	<body>
+		<div class="studio-layout">
+			<!-- Header Studio Navbar -->
+			<header class="studio-navbar">
+				<div class="brand-badge">
+					<div class="brand-icon">✨</div>
+					<div>
+						<div class="brand-title">VIRTUAL TRY-ON <span>STUDIO</span></div>
+					</div>
+					<span class="brand-tag">2D ATELIER</span>
+				</div>
+
+				<div class="header-actions">
+					<!-- Preset Look Dropdown -->
+					<select id="preset-select" class="nav-btn" style="padding-right: 28px; background-color: var(--bg-tertiary);">
+						<option value="" disabled selected>👗 Curated Styles</option>
+						<option value="casual-streetwear">Streetwear Edition</option>
+						<option value="smart-casual">Smart Casual Elegance</option>
+						<option value="biker-edge">Biker Rock Edge</option>
+						<option value="vintage-denim">Vintage Trucker</option>
+					</select>
+
+					<button id="inspire-btn" class="nav-btn" title="Randomize Look">
+						<span>🎲</span> Inspire Me
+					</button>
+
+					<button id="advisor-btn" class="nav-btn" title="AI Sizing Advisor">
+						<span>📐</span> Size Advisor
+					</button>
+
+					<button id="snapshot-btn" class="nav-btn primary" title="Download High-Res Snapshot">
+						<span>📸</span> Export Look
+					</button>
+
+					<button id="reset-btn" class="nav-btn" title="Clear all clothes">
+						<span>🔄</span> Reset
+					</button>
+				</div>
+			</header>
+
+			<!-- Studio Main Body Workspace -->
+			<main class="studio-body">
+				<!-- Center Interactive Mannequin Stage -->
+				<section class="stage-section">
+					<div class="mannequin-frame">
+						<div id="mannequin-stage-container" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;"></div>
+					</div>
+
+					<!-- Floating Fit & Skin Controls Bar -->
+					<div class="stage-floating-bar">
+						<div class="floating-group">
+							<span class="floating-label">Fit Drape</span>
+							<button class="fit-btn" data-fit="slim">Slim</button>
+							<button class="fit-btn active" data-fit="regular">Regular</button>
+							<button class="fit-btn" data-fit="oversized">Oversized</button>
+						</div>
+
+						<div class="divider-vert"></div>
+
+						<div class="floating-group">
+							<span class="floating-label">Skin Tone</span>
+							<div id="skin-swatch-list" class="skin-swatch-list"></div>
+						</div>
+					</div>
+				</section>
+
+				<!-- Right Wardrobe Catalog Drawer -->
+				<aside class="wardrobe-panel">
+					<div class="panel-header">
+						<span class="panel-title">Wardrobe Catalog</span>
+						<span id="equipped-count-tag" class="brand-tag">0 Items</span>
+					</div>
+
+					<!-- Category Tabs -->
+					<nav id="category-nav" class="category-nav"></nav>
+
+					<!-- Garments Scroll Grid -->
+					<div id="garments-container" class="garments-scroll"></div>
+
+					<!-- Active Outfit Summary Footer -->
+					<div class="outfit-summary-box">
+						<div>
+							<div class="outfit-price-label">Curated Look Total</div>
+							<div id="outfit-total-price" class="outfit-total-price">$0</div>
+						</div>
+						<button id="checkout-btn" class="nav-btn primary" onclick="alert('Look saved! Total: ' + document.getElementById('outfit-total-price').textContent);">
+							Complete Look 🛍️
+						</button>
+					</div>
+				</aside>
+			</main>
 		</div>
 
-		<!-- Interactive Garment Color Controls -->
-		<div id="controls-panel">
-			<span class="control-label">👕 Shirt Color:</span>
-			<button class="color-btn active" data-color="0x2563eb" style="background: #2563eb;" title="Royal Blue"></button>
-			<button class="color-btn" data-color="0xd92638" style="background: #d92638;" title="Crimson Red"></button>
-			<button class="color-btn" data-color="0x059669" style="background: #059669;" title="Emerald Green"></button>
-			<button class="color-btn" data-color="0x7c3aed" style="background: #7c3aed;" title="Deep Purple"></button>
-			<button class="color-btn" data-color="0x0284c7" style="background: #0284c7;" title="Cyan / Sky Blue"></button>
-			<button class="color-btn" data-color="0xd97706" style="background: #d97706;" title="Warm Amber"></button>
-			<button class="color-btn" data-color="0xffffff" style="background: #ffffff;" title="Original White"></button>
+		<!-- AI Sizing Advisor Modal -->
+		<div id="advisor-modal" class="modal-overlay">
+			<div class="modal-box">
+				<div class="modal-header">
+					<h3 class="modal-title">📐 AI Sizing & Fit Advisor</h3>
+					<button id="advisor-close" class="modal-close">&times;</button>
+				</div>
+				<p style="font-size: 13px; color: #94a3b8; margin-bottom: 16px;">
+					Enter your anatomical proportions to calculate optimal garment size for this silhouette.
+				</p>
+				<div style="display: flex; flex-direction: column; gap: 12px;">
+					<div>
+						<label style="font-size: 12px; color: #cbd5e1; font-weight: 500;">Height (cm):</label>
+						<input id="input-height" type="number" value="175" style="width: 100%; padding: 8px 12px; margin-top: 4px; background: var(--bg-primary); border: 1px solid var(--border-subtle); color: #fff; border-radius: 8px;" />
+					</div>
+					<div>
+						<label style="font-size: 12px; color: #cbd5e1; font-weight: 500;">Weight (kg):</label>
+						<input id="input-weight" type="number" value="70" style="width: 100%; padding: 8px 12px; margin-top: 4px; background: var(--bg-primary); border: 1px solid var(--border-subtle); color: #fff; border-radius: 8px;" />
+					</div>
+					<button id="calc-size-btn" class="nav-btn primary" style="justify-content: center; margin-top: 8px;">
+						Calculate Recommended Fit
+					</button>
+					<div id="size-recommendation-result"></div>
+				</div>
+			</div>
 		</div>
 
-		<script src="./js/HelioWebXRPolyfill.js"></script>
-
-		<script type="module">
-			import * as THREE from './js/three.module.js';
-			import { APP } from './js/app.js';
-			import { VRButton } from './js/VRButton.js';
-
-			window.THREE = THREE; // Used by APP Scripts.
-			window.VRButton = VRButton; // Used by APP Scripts.
-
-			var loader = new THREE.FileLoader();
-			loader.load( 'app.json', function ( text ) {
-
-				var player = new APP.Player();
-				player.load( JSON.parse( text ) );
-				player.setSize( window.innerWidth, window.innerHeight );
-				player.play();
-
-				document.body.appendChild( player.dom );
-
-				// Hide loading screen once 3D assets are loaded into WebGL
-				var overlay = document.getElementById( 'loading-overlay' );
-				if ( overlay ) {
-					overlay.classList.add( 'hidden' );
-				}
-
-				// Interactive garment color switcher
-				var colorBtns = document.querySelectorAll( '.color-btn' );
-				colorBtns.forEach( function ( btn ) {
-					btn.addEventListener( 'click', function () {
-						colorBtns.forEach( function ( b ) { b.classList.remove( 'active' ); } );
-						btn.classList.add( 'active' );
-						var hex = parseInt( btn.getAttribute( 'data-color' ), 16 );
-						var tshirt = player.scene.getObjectByName( 'tshirt1' );
-						if ( tshirt && tshirt.material ) {
-							tshirt.material.emissive.setHex( hex );
-							tshirt.material.color.setHex( hex );
-							tshirt.material.needsUpdate = true;
-						}
-					} );
-				} );
-
-				window.addEventListener( 'resize', function () {
-					player.setSize( window.innerWidth, window.innerHeight );
-				} );
-
-			} );
-		</script>
+		<!-- Studio ES Module Script -->
+		<script type="module" src="./js/studioApp.js"></script>
 	</body>
 </html>
