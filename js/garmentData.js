@@ -269,6 +269,57 @@ export const GARMENTS = [
       `;
     }
   },
+  {
+    id: 'relaxed-cargo',
+    name: 'Relaxed Tactical Cargo Pants',
+    category: 'bottoms',
+    layerOrder: 20,
+    price: '$68',
+    defaultColor: '#3f3f46',
+    availableColors: ['#3f3f46', '#14532d', '#78350f', '#18181b', '#d97706'],
+    render: (color, fit = 'regular') => {
+      const wMod = fit === 'slim' ? -1 : (fit === 'oversized' ? 8 : 4);
+      return `
+        <g id="garment-relaxed-cargo" class="garment-group">
+          <!-- Waist -->
+          <rect x="${144 - wMod}" y="264" width="${112 + wMod * 2}" height="15" fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.2" />
+          
+          <!-- Left Leg -->
+          <path d="M ${144 - wMod} 279 
+                   L ${136 - wMod} 355
+                   L ${140 - wMod} 460
+                   L ${146 - wMod} 595
+                   L 175 595
+                   L 178 460
+                   L 200 328
+                   Z" 
+                fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.5" />
+          
+          <!-- Right Leg -->
+          <path d="M ${256 + wMod} 279 
+                   L ${264 + wMod} 355
+                   L ${260 + wMod} 460
+                   L ${254 + wMod} 595
+                   L 225 595
+                   L 222 460
+                   L 200 328
+                   Z" 
+                fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.5" />
+          
+          <!-- Side Cargo Pockets with Flaps -->
+          <rect x="${134 - wMod}" y="380" width="22" height="32" rx="2" fill="rgba(0,0,0,0.18)" stroke="rgba(0,0,0,0.3)" stroke-width="1.2" />
+          <polygon points="${133 - wMod},380 ${157 - wMod},380 ${155 - wMod},388 ${135 - wMod},388" fill="${color}" stroke="rgba(0,0,0,0.35)" stroke-width="1" />
+          
+          <rect x="${244 + wMod}" y="380" width="22" height="32" rx="2" fill="rgba(0,0,0,0.18)" stroke="rgba(0,0,0,0.3)" stroke-width="1.2" />
+          <polygon points="${243 + wMod},380 ${267 + wMod},380 ${265 + wMod},388 ${245 + wMod},388" fill="${color}" stroke="rgba(0,0,0,0.35)" stroke-width="1" />
+          
+          <!-- Knee Dart Folds -->
+          <line x1="${145 - wMod}" y1="465" x2="${172 - wMod}" y2="465" stroke="rgba(0,0,0,0.2)" stroke-width="1.5" />
+          <line x1="${255 + wMod}" y1="465" x2="${228 + wMod}" y2="465" stroke="rgba(0,0,0,0.2)" stroke-width="1.5" />
+        </g>
+      `;
+    }
+  },
 
   // =================== OUTERWEAR ===================
   {
@@ -378,6 +429,60 @@ export const GARMENTS = [
       `;
     }
   },
+  {
+    id: 'trench-coat',
+    name: 'Double-Breasted Heritage Trench Coat',
+    category: 'outerwear',
+    layerOrder: 40,
+    price: '$175',
+    defaultColor: '#d97706',
+    availableColors: ['#d97706', '#1e293b', '#0f172a', '#78350f', '#f8fafc'],
+    render: (color, fit = 'regular') => {
+      const wMod = fit === 'slim' ? 0 : (fit === 'oversized' ? 10 : 4);
+      return `
+        <g id="garment-trench-coat" class="garment-group">
+          <!-- Main Body Long Silhouette -->
+          <path d="M 164 110 
+                   L 190 148
+                   L 186 460
+                   L ${138 - wMod} 450
+                   L ${148 - wMod} 280
+                   L ${150 - wMod} 190
+                   L ${130 - wMod} 205
+                   L ${114 - wMod} 133
+                   Z" 
+                fill="${color}" stroke="rgba(0,0,0,0.35)" stroke-width="1.8" />
+          
+          <path d="M 236 110 
+                   L 190 152
+                   L 192 460
+                   L ${262 + wMod} 450
+                   L ${252 + wMod} 280
+                   L ${250 + wMod} 190
+                   L ${270 + wMod} 205
+                   L ${286 + wMod} 133
+                   Z" 
+                fill="${color}" stroke="rgba(0,0,0,0.35)" stroke-width="1.8" />
+          
+          <!-- Wide Storm Lapels -->
+          <polygon points="164,108 144,142 192,148 180,108" fill="${color}" stroke="rgba(0,0,0,0.35)" stroke-width="1.2" />
+          <polygon points="236,108 256,142 192,148 220,108" fill="${color}" stroke="rgba(0,0,0,0.35)" stroke-width="1.2" />
+          
+          <!-- Double Breasted Horn Buttons -->
+          <circle cx="182" cy="190" r="3" fill="#1c1917" stroke="#78350f" stroke-width="1" />
+          <circle cx="218" cy="190" r="3" fill="#1c1917" stroke="#78350f" stroke-width="1" />
+          <circle cx="182" cy="230" r="3" fill="#1c1917" stroke="#78350f" stroke-width="1" />
+          <circle cx="218" cy="230" r="3" fill="#1c1917" stroke="#78350f" stroke-width="1" />
+          <circle cx="182" cy="270" r="3" fill="#1c1917" stroke="#78350f" stroke-width="1" />
+          <circle cx="218" cy="270" r="3" fill="#1c1917" stroke="#78350f" stroke-width="1" />
+          
+          <!-- Belt with D-ring Buckle -->
+          <rect x="${146 - wMod}" y="278" width="${108 + wMod * 2}" height="12" fill="rgba(0,0,0,0.2)" stroke="rgba(0,0,0,0.3)" stroke-width="1" />
+          <rect x="194" y="276" width="16" height="16" rx="2" fill="#d4af37" stroke="#78350f" stroke-width="1" />
+        </g>
+      `;
+    }
+  },
 
   // =================== SHOES ===================
   {
@@ -477,6 +582,22 @@ export const GARMENTS = [
         <!-- Curved Brim/Visor -->
         <path d="M 166 46 C 185 40, 215 40, 234 46 C 248 55, 225 58, 200 58 C 175 58, 152 55, 166 46 Z" fill="${color}" stroke="rgba(0,0,0,0.4)" stroke-width="1.5" />
         <path d="M 172 47 C 185 43, 215 43, 228 47" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+      </g>
+    `
+  },
+  {
+    id: 'gold-chain',
+    name: 'Cuban Link Chain Necklace',
+    category: 'accessories',
+    layerOrder: 60,
+    price: '$85',
+    defaultColor: '#d4af37',
+    availableColors: ['#d4af37', '#e2e8f0', '#78350f'],
+    render: (color) => `
+      <g id="garment-gold-chain" class="garment-group">
+        <!-- Choker / Collar drape chain around neck -->
+        <path d="M 184 108 C 185 130, 215 130, 216 108" fill="none" stroke="${color}" stroke-width="2.5" stroke-dasharray="2,2" stroke-linecap="round" />
+        <circle cx="200" cy="128" r="2.5" fill="${color}" />
       </g>
     `
   }
