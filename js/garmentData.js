@@ -12,7 +12,7 @@ export const GARMENTS = [
     layerOrder: 30,
     price: '$28',
     defaultColor: '#2563eb',
-    availableColors: ['#2563eb', '#1e293b', '#ffffff', '#dc2626', '#059669', '#d97706', '#7c3aed', '#ec4899'],
+    availableColors: ['#2563eb', '#1e293b', '#ffffff', '#dc2626', '#059669', '#d97706', '#7c3aed', '#ec4899', '#06b6d4', '#e11d48', '#84cc16', '#facc15', '#6366f1', '#14b8a6'],
     render: (color, fit = 'regular') => {
       const wMod = fit === 'slim' ? -4 : (fit === 'oversized' ? 7 : 0);
       const lMod = fit === 'slim' ? -3 : (fit === 'oversized' ? 8 : 0);
@@ -760,6 +760,28 @@ export const PRESET_OUTFITS = [
       bottoms: { id: 'chinos', color: '#1e293b', fit: 'regular' },
       shoes: { id: 'urban-sneakers', color: '#ffffff' },
       accessories: { id: 'baseball-cap', color: '#dc2626' }
+    }
+  },
+  {
+    id: 'skater-summer',
+    name: 'Skater Summer Vibes',
+    description: 'Oversized striped skater tee paired with casual weekend shorts and white sneakers.',
+    items: {
+      tops: { id: 'striped-tee', color: '#1e3a8a', fit: 'oversized' },
+      bottoms: { id: 'bermuda-shorts', color: '#334155', fit: 'regular' },
+      shoes: { id: 'urban-sneakers', color: '#ffffff' },
+      accessories: { id: 'baseball-cap', color: '#1e40af' }
+    }
+  },
+  {
+    id: 'vintage-rocker',
+    name: 'Vintage Rocker Look',
+    description: 'Distressed vintage rock tee with tactical cargos and Cuban link chain.',
+    items: {
+      tops: { id: 'graphic-tee', color: '#18181b', fit: 'regular' },
+      bottoms: { id: 'relaxed-cargo', color: '#3f3f46', fit: 'oversized' },
+      shoes: { id: 'chelsea-boots', color: '#1c1917' },
+      accessories: { id: 'gold-chain', color: '#d4af37' }
     }
   }
 ];
