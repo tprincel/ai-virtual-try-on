@@ -1,7 +1,8 @@
 {
   "name": "ai-virtual-try-on",
-  "version": "1.0.0",
-  "description": "Interactive AI-powered 3D virtual try-on web application for real-time garment fitting and avatar simulation.",
+  "version": "2.0.0",
+  "type": "module",
+  "description": "Interactive AI-powered 2D Virtual Try-On Studio with precision anatomical mannequin fitting, live color customization, dynamic fit drape controls, and look export.",
   "main": "index.html",
   "scripts": {
     "start": "python -m http.server 8000",
@@ -9,14 +10,14 @@
     "dev": "python -m http.server 8000"
   },
   "keywords": [
-    "ai",
     "virtual-try-on",
-    "threejs",
-    "3d",
-    "webgl",
-    "webxr",
     "fashion-tech",
-    "cloth-simulation"
+    "mannequin",
+    "2d-canvas",
+    "vector-apparel",
+    "outfit-simulation",
+    "wardrobe-planner",
+    "styling-engine"
   ],
   "author": "Princel Tixeira <princetixeira@gmail.com>",
   "license": "MIT"
