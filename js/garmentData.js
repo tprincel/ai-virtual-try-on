@@ -127,6 +127,40 @@ export const GARMENTS = [
     }
   },
   {
+    id: 'vneck-tee',
+    name: 'Summer Linen V-Neck T-Shirt',
+    category: 'tops',
+    layerOrder: 30,
+    price: '$30',
+    defaultColor: '#f1f5f9',
+    availableColors: ['#f1f5f9', '#cbd5e1', '#059669', '#d97706', '#be185d', '#334155'],
+    render: (color, fit = 'regular') => {
+      const wMod = fit === 'slim' ? -4 : (fit === 'oversized' ? 7 : 0);
+      return `
+        <g id="garment-vneck-tee" class="garment-group">
+          <!-- Torso -->
+          <path d="M 172 115 
+                   L 200 148
+                   L 228 115
+                   L ${278 + wMod} 135
+                   L ${260 + wMod} 200
+                   L ${245 + wMod} 190
+                   L ${248 + wMod} 275
+                   C 230 280, 170 280, ${152 - wMod} 275
+                   L ${155 - wMod} 190
+                   L ${140 - wMod} 200
+                   L ${122 - wMod} 135
+                   Z" 
+                fill="${color}" stroke="rgba(0,0,0,0.18)" stroke-width="1.5" />
+          
+          <!-- V-Neck Band Stitching -->
+          <path d="M 170 114 L 200 148 L 230 114" fill="none" stroke="rgba(0,0,0,0.25)" stroke-width="2" stroke-linecap="round" />
+          <path d="M 172 116 L 200 150 L 228 116" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1" />
+        </g>
+      `;
+    }
+  },
+  {
     id: 'oxford-shirt',
     name: 'Tailored Oxford Button-Down',
     category: 'tops',
