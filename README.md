@@ -1,77 +1,62 @@
-# AI 3D Virtual Try-On 👗✨
+# AI 2D Virtual Try-On Studio 👗✨
 
-[![Three.js](https://img.shields.io/badge/Three.js-r120+-black?style=for-the-badge&logo=three.js)](https://threejs.org/)
-[![WebGL](https://img.shields.io/badge/WebGL-2.0-red?style=for-the-badge&logo=webgl)](https://www.khronos.org/webgl/)
-[![WebXR](https://img.shields.io/badge/WebXR-Enabled-blue?style=for-the-badge)](https://immersiveweb.dev/)
+[![Version](https://img.shields.io/badge/Version-2.0.0-blue?style=for-the-badge)](package.json)
+[![HTML5](https://img.shields.io/badge/HTML5-Modern%20Semantic-orange?style=for-the-badge&logo=html5)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+[![CSS3](https://img.shields.io/badge/CSS3-Glassmorphic%20UI-1572b6?style=for-the-badge&logo=css3)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES%20Modules-f7df1e?style=for-the-badge&logo=javascript)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
-An interactive, browser-based **AI 3D Virtual Try-On** application engineered with Three.js, WebGL, and WebXR. This platform enables users to experience real-time 3D garment fitting, model manipulation, and interactive clothing simulation directly within the web browser without any external plugins.
+An interactive, high-fidelity **2D AI Virtual Try-On Studio** engineered with pure modern web technologies. Designed for seamless, instantaneous garment fitting on an anatomical 2D fashion mannequin with dynamic drape physics, real-time colorway customization, and curated outfit presets.
 
 ---
 
 ## 🌟 Key Features
 
-- **Real-Time 3D Fitting**: High-fidelity 3D garment rendering with realistic lighting, shadows, and fabric textures.
-- **Interactive Try-On Simulation**: Hover and interact directly with clothes or avatar body parts to test different garment configurations.
-- **Hardware-Accelerated WebGL Engine**: Smooth frame rates powered by custom Three.js Player runtime architecture.
-- **WebXR & VR Ready**: Full compatibility with VR headsets and spatial interfaces via WebXR polyfills.
-- **Responsive Viewport**: Automatically adapts across desktop monitors, laptops, and mobile screens.
-- **Seamless Loading HUD**: Built-in animated loader with visual feedback while 3D mesh assets are initialized.
+- **Precision Anatomical Mannequin**: Scalable vector mannequin with realistic proportions (shoulders, chest, waist, hips, and limbs) and customizable skin tone palettes (Fair Ivory, Warm Beige, Sunlit Tan, Rich Bronze, Deep Espresso, Studio Slate).
+- **Proper Garment Alignment & Fitting**: Every garment in the catalog is engineered to wrap and align precisely to the mannequin's anatomical landmarks, eliminating distortion and clipping.
+- **Dynamic Fit Drape Controls**: Toggle between **Slim**, **Regular**, and **Oversized** fits with real-time silhouette adjustment and fold creep calculations.
+- **Multi-Layer Stacking Engine**: Seamless depth layering for realistic fashion composition:
+  - *Base*: Anatomical mannequin silhouette & contour highlights
+  - *Layer 20*: Tailored bottoms (Jeans, chinos, shorts, cargo pants)
+  - *Layer 30*: Inner tops (Crewnecks, button-down oxfords, hoodies)
+  - *Layer 40*: Outerwear (Trucker denim jackets, leather biker jackets, heritage trench coats)
+  - *Layer 50*: Footwear (Minimalist leather sneakers, suede Chelsea boots)
+  - *Layer 60*: Accessories (Aviator sunglasses, embroidered dad caps, Cuban link chains)
+- **Live Fabric Color Swatching**: Switch fabric colorways dynamically with preserved ambient shading, fold creases, and highlights.
+- **Curated Style Presets & Randomizer**: One-click styling for *Casual Streetwear*, *Smart Casual Elegance*, *Biker Rock Edge*, and *Vintage Trucker*, plus an "Inspire Me" random outfit generator.
+- **AI Sizing & Fit Advisor**: Integrated calculator providing personalized size recommendations (S, M, L, XL) based on height, weight, and silhouette preferences.
+- **High-Resolution Look Exporter**: Capture and download 800x1400 PNG snapshots of customized outfits for sharing or lookbook creation.
+- **Zero Heavy Assets**: Instant 0-second loading with no bulky 3D files or WebGL lag.
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Graphics & Rendering**: [Three.js](https://threejs.org/) (WebGL 2.0)
-- **XR Capabilities**: WebXR Device API, Helio WebXR Polyfill, Three.js VRButton
-- **Language**: Modern JavaScript (ES Modules), HTML5, CSS3
-- **Scene Serialization**: Three.js JSON Object Scene Specification (`app.json`)
+- **Rendering Engine**: Dynamic Scalable Vector Graphics (SVG 1.1 / 2.0) with XML serialization and Canvas 2D export.
+- **Architecture**: Modular ES6 Modules (`TryOnEngine`, `Mannequin`, `GarmentCatalog`, `StudioApp`).
+- **Styling**: Modern Glassmorphic Dark UI, CSS Custom Properties, and responsive flex/grid layouts.
+- **Exporting**: HTML5 Canvas rendering pipeline for high-res PNG snapshot generation.
 
 ---
 
 ## 🚀 Getting Started
 
-Because the 3D scene data (`app.json` ~75MB) and ES modules are loaded dynamically, modern web browsers require the project to be served through a local HTTP server to satisfy CORS requirements.
+Because the studio uses native ES modules (`import`/`export`), it is best run through a local HTTP server:
 
-### Prerequisites
-
-Make sure you have either **Python 3** or **Node.js** installed:
-
+### Quick Start with Python
 ```powershell
-python --version
-# or
-node --version
+python -m http.server 8000
 ```
 
-### Installation & Running Locally
+### Or with Node.js
+```bash
+npm start
+# or
+npx serve -l 8000
+```
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/tprincel/ai-virtual-try-on.git
-   cd ai-virtual-try-on
-   ```
-
-2. **Start the local server**:
-   
-   Using Python:
-   ```powershell
-   python -m http.server 8000
-   ```
-   
-   *Or using npm / npx:*
-   ```bash
-   npm start
-   # or
-   npx serve -l 8000
-   ```
-
-3. **Open in your browser**:
-   Navigate to:
-   ```
-   http://localhost:8000
-   ```
-
-> 💡 **Tip**: When opening the page, the 3D scene loads into memory in ~3–5 seconds. Once the loading spinner fades out, you can drag to rotate the camera, zoom with the scroll wheel, and hover over clothing pieces to try them on.
+### Open in Browser
+Visit [http://localhost:8000](http://localhost:8000) in any modern web browser (Chrome, Edge, Safari, Firefox).
 
 ---
 
@@ -80,19 +65,16 @@ node --version
 ```
 ai-virtual-try-on/
 ├── css/
-│   └── style.css            # Modern dark UI, responsive styling, and loading spinner
+│   └── style.css            # Studio dark mode theme, glassmorphic panels & responsive styles
 ├── js/
-│   ├── app.js               # Three.js Player runtime and event dispatcher
-│   ├── dat.gui.module.js    # Interactive developer debug controls
-│   ├── HelioWebXRPolyfill.js# WebXR polyfill for extended browser support
-│   ├── three.module.js      # Three.js core 3D library (ES module)
-│   └── VRButton.js          # WebXR VR hardware trigger button
-├── app.json                 # 3D avatar, garment geometries, materials & lights (~75MB)
-├── index.html               # Main application entry point and WebGL canvas
-├── package.json             # Project metadata, keywords, and launch scripts
-├── .gitignore               # Ignored system and local files
+│   ├── garmentData.js       # Anatomical SVG vector garment catalog & preset outfits
+│   ├── mannequin.js         # Anatomical 2D mannequin model with dynamic skin tones
+│   ├── tryOnEngine.js       # Stacking order, fit drape transformations & scene composer
+│   └── studioApp.js         # UI orchestrator, event bindings, size advisor & snapshot exporter
+├── index.html               # Main studio atelier application
+├── package.json             # Project metadata & npm run scripts
 ├── LICENSE                  # MIT License
-└── README.md                # Project documentation and guide
+└── README.md                # Project documentation
 ```
 
 ---
