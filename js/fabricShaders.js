@@ -20,4 +20,11 @@ export const FABRIC_SHADERS = `
     <line x1="1" y1="0" x2="1" y2="8" stroke="rgba(255,255,255,0.06)" stroke-width="1" />
     <line x1="3" y1="0" x2="3" y2="8" stroke="rgba(0,0,0,0.12)" stroke-width="1" />
   </pattern>
+  <!-- Luxury Silk Satin Highlight Gradient -->
+  <linearGradient id="silkSheen" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="rgba(255,255,255,0.18)" />
+    <stop offset="35%" stop-color="rgba(255,255,255,0)" />
+    <stop offset="70%" stop-color="rgba(255,255,255,0.12)" />
+    <stop offset="100%" stop-color="rgba(0,0,0,0.2)" />
+  </linearGradient>
 `;
