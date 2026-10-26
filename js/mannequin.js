@@ -1,15 +1,16 @@
 /**
- * 2D Virtual Try-On - Mannequin Engine
- * Anatomical 2D fashion mannequin with dynamic skin tones, muscle shading, and ground shadow.
+ * 2D Virtual Try-On - Mannequin Engine (Redesigned Modern Game Avatar)
+ * High-fidelity athletic fashion croquis with sleek seamless compression shapewear,
+ * natural hand/limb anatomy, and ambient occlusion contact shadows.
  */
 
 export const SKIN_TONES = [
-  { id: 'fair', name: 'Fair Ivory', hex: '#f6d5bd', shadow: '#e4b69b' },
-  { id: 'warm', name: 'Warm Beige', hex: '#e8be96', shadow: '#d09f73' },
-  { id: 'tan', name: 'Sunlit Tan', hex: '#c58d60', shadow: '#a97042' },
-  { id: 'bronze', name: 'Rich Bronze', hex: '#8c5235', shadow: '#6b3c22' },
-  { id: 'deep', name: 'Deep Espresso', hex: '#4e2f1d', shadow: '#371f11' },
-  { id: 'slate', name: 'Studio Slate', hex: '#64748b', shadow: '#475569' }
+  { id: 'fair', name: 'Fair Ivory', hex: '#f7d7c4', shadow: '#e2b399', highlight: '#fff2eb' },
+  { id: 'warm', name: 'Warm Beige', hex: '#e8be96', shadow: '#c9986d', highlight: '#fbf0e3' },
+  { id: 'tan', name: 'Sunlit Tan', hex: '#c58d60', shadow: '#a36d40', highlight: '#e0b28a' },
+  { id: 'bronze', name: 'Rich Bronze', hex: '#8c5235', shadow: '#6a381f', highlight: '#b17454' },
+  { id: 'deep', name: 'Deep Espresso', hex: '#4e2f1d', shadow: '#351d0e', highlight: '#6e442c' },
+  { id: 'slate', name: 'Studio Slate', hex: '#64748b', shadow: '#475569', highlight: '#94a3b8' }
 ];
 
 export class Mannequin {
@@ -33,7 +34,7 @@ export class Mannequin {
   }
 
   getSVGMarkup() {
-    const { hex, shadow } = this.skinTone;
+    const { hex, shadow, highlight } = this.skinTone;
 
     return `
       <g id="mannequin-root">
@@ -41,129 +42,235 @@ export class Mannequin {
           <!-- Dynamic Skin Gradient -->
           <linearGradient id="skinGrad" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stop-color="${shadow}" />
-            <stop offset="50%" stop-color="${hex}" />
+            <stop offset="28%" stop-color="${hex}" />
+            <stop offset="50%" stop-color="${highlight || hex}" />
+            <stop offset="72%" stop-color="${hex}" />
+            <stop offset="100%" stop-color="${shadow}" />
+          </linearGradient>
+
+          <!-- Arm Left Shading -->
+          <linearGradient id="armLeftGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="${shadow}" />
+            <stop offset="45%" stop-color="${hex}" />
+            <stop offset="100%" stop-color="${shadow}" stop-opacity="0.8" />
+          </linearGradient>
+
+          <!-- Arm Right Shading -->
+          <linearGradient id="armRightGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="${shadow}" stop-opacity="0.8" />
+            <stop offset="55%" stop-color="${hex}" />
             <stop offset="100%" stop-color="${shadow}" />
           </linearGradient>
 
           <!-- Head Spherical Lighting -->
-          <radialGradient id="headGrad" cx="45%" cy="40%" r="60%">
-            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.3" />
-            <stop offset="60%" stop-color="${hex}" />
+          <radialGradient id="headGrad" cx="45%" cy="38%" r="62%">
+            <stop offset="0%" stop-color="${highlight || '#ffffff'}" stop-opacity="0.5" />
+            <stop offset="50%" stop-color="${hex}" />
             <stop offset="100%" stop-color="${shadow}" />
           </radialGradient>
 
+          <!-- Shapewear Texture Gradient -->
+          <linearGradient id="shapewearGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1e293b" />
+            <stop offset="50%" stop-color="#0f172a" />
+            <stop offset="100%" stop-color="#090d16" />
+          </linearGradient>
+
+          <!-- Shapewear Top Gradient -->
+          <linearGradient id="shapewearTopGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#334155" />
+            <stop offset="100%" stop-color="#0f172a" />
+          </linearGradient>
+
           <!-- Floor Contact Shadow -->
           <radialGradient id="floorShadow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="rgba(0,0,0,0.45)" />
-            <stop offset="60%" stop-color="rgba(0,0,0,0.15)" />
+            <stop offset="0%" stop-color="rgba(0,0,0,0.55)" />
+            <stop offset="50%" stop-color="rgba(0,0,0,0.2)" />
             <stop offset="100%" stop-color="rgba(0,0,0,0)" />
           </radialGradient>
+
+          <!-- Ambient Under-Chin Shadow -->
+          <linearGradient id="chinShadowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="rgba(0,0,0,0.3)" />
+            <stop offset="100%" stop-color="rgba(0,0,0,0)" />
+          </linearGradient>
         </defs>
 
-        <!-- Pedestal / Floor Shadow -->
-        <ellipse cx="200" cy="650" rx="90" ry="14" fill="url(#floorShadow)" />
-        <ellipse cx="200" cy="650" rx="100" ry="8" fill="rgba(0,0,0,0.18)" />
+        <!-- Ground Pedestal Shadow -->
+        <ellipse cx="200" cy="648" rx="88" ry="12" fill="url(#floorShadow)" />
+        <ellipse cx="200" cy="648" rx="55" ry="6" fill="rgba(0,0,0,0.35)" />
 
-        <!-- Mannequin Base Body Group -->
+        <!-- Base Mannequin Character Body -->
         <g id="mannequin-body" class="mannequin-skin">
           
-          <!-- Left Leg -->
-          <path class="skin-fill" d="M 148 290 
-                   C 142 350, 142 420, 148 480 
-                   C 150 520, 152 570, 155 625 
-                   L 170 625 
-                   C 174 570, 178 520, 178 480 
-                   C 182 420, 188 350, 196 325 
-                   Z" 
+          <!-- ================= LEGS ================= -->
+          <!-- Left Leg (Natural Athletic Stance) -->
+          <path class="skin-fill" d="M 148 290
+                   C 140 340, 138 395, 144 445
+                   C 146 470, 148 510, 152 560
+                   C 154 585, 156 610, 156 630
+                   L 172 630
+                   C 174 610, 176 585, 176 560
+                   C 178 510, 180 470, 180 445
+                   C 183 395, 188 350, 194 322
+                   Z"
                 fill="url(#skinGrad)" stroke="${shadow}" stroke-width="1.2" />
 
-          <!-- Right Leg -->
-          <path class="skin-fill" d="M 252 290 
-                   C 258 350, 258 420, 252 480 
-                   C 250 520, 248 570, 245 625 
-                   L 230 625 
-                   C 226 570, 222 520, 222 480 
-                   C 218 420, 212 350, 204 325 
-                   Z" 
+          <!-- Right Leg (Natural Athletic Stance) -->
+          <path class="skin-fill" d="M 252 290
+                   C 260 340, 262 395, 256 445
+                   C 254 470, 252 510, 248 560
+                   C 246 585, 244 610, 244 630
+                   L 228 630
+                   C 226 610, 224 585, 224 560
+                   C 222 510, 220 470, 220 445
+                   C 217 395, 212 350, 206 322
+                   Z"
                 fill="url(#skinGrad)" stroke="${shadow}" stroke-width="1.2" />
 
-          <!-- Knee Highlights -->
-          <ellipse cx="163" cy="485" rx="7" ry="9" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
-          <ellipse cx="237" cy="485" rx="7" ry="9" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
+          <!-- Left Knee Anatomy Definition -->
+          <path d="M 152 445 Q 163 438, 173 445" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.5" />
+          <path d="M 154 458 Q 163 464, 171 458" fill="none" stroke="rgba(0,0,0,0.12)" stroke-width="1.5" />
 
-          <!-- Left Foot (Base) -->
-          <path class="skin-fill" d="M 155 625 L 140 642 L 175 642 L 170 625 Z" fill="${hex}" stroke="${shadow}" stroke-width="1" />
+          <!-- Right Knee Anatomy Definition -->
+          <path d="M 227 445 Q 237 438, 248 445" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.5" />
+          <path d="M 229 458 Q 237 464, 246 458" fill="none" stroke="rgba(0,0,0,0.12)" stroke-width="1.5" />
 
-          <!-- Right Foot (Base) -->
-          <path class="skin-fill" d="M 245 625 L 260 642 L 225 642 L 230 625 Z" fill="${hex}" stroke="${shadow}" stroke-width="1" />
+          <!-- Left Foot (Contoured Model Stance) -->
+          <path class="skin-fill" d="M 156 630 L 142 642 C 148 646, 174 646, 176 642 L 172 630 Z" 
+                fill="${hex}" stroke="${shadow}" stroke-width="1" />
+          <path d="M 148 642 Q 160 638, 172 642" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="1" />
 
-          <!-- Pelvis & Underwear Line -->
-          <path class="skin-fill" d="M 148 270 Q 200 280, 252 270 L 255 310 Q 200 338, 145 310 Z" fill="${shadow}" opacity="0.4" />
+          <!-- Right Foot (Contoured Model Stance) -->
+          <path class="skin-fill" d="M 244 630 L 258 642 C 252 646, 226 646, 224 642 L 228 630 Z" 
+                fill="${hex}" stroke="${shadow}" stroke-width="1" />
+          <path d="M 252 642 Q 240 638, 228 642" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="1" />
 
-          <!-- Main Torso (Chest to Waist to Hips) -->
-          <path class="skin-fill" d="M 172 110 
-                   L 228 110 
-                   L 280 135 
-                   L 260 215 
-                   L 252 290 
-                   Q 200 300, 148 290 
-                   L 140 215 
-                   L 120 135 
-                   Z" 
-                fill="url(#skinGrad)" stroke="${shadow}" stroke-width="1.5" />
+          <!-- ================= TORSO & SHAPEWEAR ================= -->
+          <!-- Main Athletic Torso -->
+          <path class="skin-fill" d="M 172 114
+                   L 228 114
+                   L 278 136
+                   C 268 180, 260 215, 252 245
+                   C 246 270, 250 288, 252 300
+                   C 230 310, 170 310, 148 300
+                   C 150 288, 154 270, 148 245
+                   C 140 215, 132 180, 122 136
+                   Z"
+                fill="url(#skinGrad)" stroke="${shadow}" stroke-width="1.4" />
 
-          <!-- Left Arm -->
-          <path class="skin-fill" d="M 120 135 
-                   C 106 170, 96 220, 95 260 
-                   C 94 285, 90 320, 86 350 
-                   L 98 350 
-                   C 104 320, 110 285, 114 260 
-                   C 120 220, 130 180, 138 155 
-                   Z" 
-                fill="url(#skinGrad)" stroke="${shadow}" stroke-width="1.2" />
+          <!-- Sleek Modern High-Waist Compression Shorts (Replaces raw underwear) -->
+          <g id="base-compression-shorts">
+            <path d="M 148 252
+                     C 170 256, 230 256, 252 252
+                     C 255 272, 258 296, 257 325
+                     L 224 328
+                     C 214 316, 206 312, 200 312
+                     C 194 312, 186 316, 176 328
+                     L 143 325
+                     C 142 296, 145 272, 148 252
+                     Z"
+                  fill="url(#shapewearGrad)" stroke="#334155" stroke-width="1.2" />
+            <!-- Waistband Ribbing Accent -->
+            <path d="M 148 252 C 170 256, 230 256, 252 252 L 253 259 C 230 263, 170 263, 147 259 Z" 
+                  fill="#475569" opacity="0.6" />
+            <!-- Ergonomic Laser Seams -->
+            <path d="M 168 255 Q 164 288, 160 326" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+            <path d="M 232 255 Q 236 288, 240 326" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+          </g>
 
-          <!-- Left Hand -->
-          <ellipse cx="92" cy="362" rx="7" ry="14" fill="${hex}" stroke="${shadow}" stroke-width="1" />
+          <!-- Sleek Seamless Athletic Crop Top / Base Layer -->
+          <g id="base-compression-top">
+            <path d="M 166 126
+                     C 180 134, 220 134, 234 126
+                     L 252 142
+                     L 248 198
+                     C 230 205, 170 205, 152 198
+                     L 148 142
+                     Z"
+                  fill="url(#shapewearTopGrad)" stroke="#334155" stroke-width="1" />
+            <!-- Subtle Chest Compression Seam -->
+            <path d="M 154 194 C 170 198, 230 198, 246 194" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+          </g>
 
-          <!-- Right Arm -->
-          <path class="skin-fill" d="M 280 135 
-                   C 294 170, 304 220, 305 260 
-                   C 306 285, 310 320, 314 350 
-                   L 302 350 
-                   C 296 320, 290 285, 286 260 
-                   C 280 220, 270 180, 262 155 
-                   Z" 
-                fill="url(#skinGrad)" stroke="${shadow}" stroke-width="1.2" />
+          <!-- Clavicles & Neck Contours -->
+          <path d="M 172 118 Q 186 124, 200 120 Q 214 124, 228 118" fill="none" stroke="rgba(0,0,0,0.16)" stroke-width="1.5" stroke-linecap="round" />
 
-          <!-- Right Hand -->
-          <ellipse cx="308" cy="362" rx="7" ry="14" fill="${hex}" stroke="${shadow}" stroke-width="1" />
+          <!-- ================= ARMS & HANDS ================= -->
+          <!-- Left Arm (Relaxed Fashion Stance, Natural Width) -->
+          <path class="skin-fill" d="M 122 136
+                   C 112 165, 106 200, 105 235
+                   C 104 265, 107 295, 108 320
+                   L 122 320
+                   C 121 295, 120 265, 122 235
+                   C 125 200, 131 168, 138 145
+                   Z"
+                fill="url(#armLeftGrad)" stroke="${shadow}" stroke-width="1.2" />
 
-          <!-- Sculpted Anatomical Details / Contours -->
-          <!-- Pectoral / Chest Contours -->
-          <path d="M 152 165 Q 175 185, 198 175" fill="none" stroke="rgba(0,0,0,0.12)" stroke-width="2" stroke-linecap="round" />
-          <path d="M 248 165 Q 225 185, 202 175" fill="none" stroke="rgba(0,0,0,0.12)" stroke-width="2" stroke-linecap="round" />
-          <!-- Sternum & Abdominal Line -->
-          <line x1="200" y1="165" x2="200" y2="255" stroke="rgba(0,0,0,0.08)" stroke-width="2" stroke-linecap="round" />
-          <path d="M 180 205 Q 200 215, 220 205" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="1.5" />
-          <path d="M 182 235 Q 200 245, 218 235" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="1.5" />
+          <!-- Left Hand (Sculpted Relaxed Pose) -->
+          <g id="left-hand">
+            <path class="skin-fill" d="M 108 320
+                     C 106 332, 104 344, 105 352
+                     C 106 356, 110 357, 113 354
+                     L 116 342
+                     L 119 353
+                     C 120 356, 124 355, 124 351
+                     L 122 320
+                     Z"
+                  fill="${hex}" stroke="${shadow}" stroke-width="1" />
+            <!-- Thumb -->
+            <path d="M 116 324 Q 123 332, 120 340" fill="none" stroke="${shadow}" stroke-width="1" />
+          </g>
 
+          <!-- Right Arm (Relaxed Fashion Stance, Natural Width) -->
+          <path class="skin-fill" d="M 278 136
+                   C 288 165, 294 200, 295 235
+                   C 296 265, 293 295, 292 320
+                   L 278 320
+                   C 279 295, 280 265, 278 235
+                   C 275 200, 269 168, 262 145
+                   Z"
+                fill="url(#armRightGrad)" stroke="${shadow}" stroke-width="1.2" />
+
+          <!-- Right Hand (Sculpted Relaxed Pose) -->
+          <g id="right-hand">
+            <path class="skin-fill" d="M 292 320
+                     C 294 332, 296 344, 295 352
+                     C 294 356, 290 357, 287 354
+                     L 284 342
+                     L 281 353
+                     C 280 356, 276 355, 276 351
+                     L 278 320
+                     Z"
+                  fill="${hex}" stroke="${shadow}" stroke-width="1" />
+            <!-- Thumb -->
+            <path d="M 284 324 Q 277 332, 280 340" fill="none" stroke="${shadow}" stroke-width="1" />
+          </g>
+
+          <!-- ================= NECK & HEAD ================= -->
           <!-- Neck -->
-          <path class="skin-fill" d="M 188 80 L 186 115 L 214 115 L 212 80 Z" fill="url(#skinGrad)" stroke="${shadow}" stroke-width="1.2" />
-          <!-- Clavicles / Collarbones -->
-          <path d="M 172 115 Q 186 122, 200 118 Q 214 122, 228 115" fill="none" stroke="rgba(0,0,0,0.18)" stroke-width="1.5" stroke-linecap="round" />
+          <path class="skin-fill" d="M 187 86 L 185 120 L 215 120 L 213 86 Z" 
+                fill="url(#skinGrad)" stroke="${shadow}" stroke-width="1.2" />
+          <!-- Under-Chin Shadow -->
+          <ellipse cx="200" cy="94" rx="14" ry="4" fill="url(#chinShadowGrad)" />
 
-          <!-- Sculpted Mannequin Head (Abstract Fashion Form) -->
-          <path d="M 200 24 
-                   C 222 24, 225 45, 224 64 
-                   C 223 80, 210 94, 200 96 
-                   C 190 94, 177 80, 176 64 
-                   C 175 45, 178 24, 200 24 
-                   Z" 
-                fill="url(#headGrad)" stroke="${shadow}" stroke-width="1.5" />
-          
-          <!-- Head Center Line Highlight & Minimalist Face Plane -->
-          <path d="M 200 38 L 200 78" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" stroke-linecap="round" />
-          <path d="M 194 65 Q 200 70, 206 65" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="1.2" />
+          <!-- Sculpted Head (Fashion Croquis Proportions) -->
+          <!-- Ears -->
+          <ellipse cx="173" cy="62" rx="4" ry="8" fill="${shadow}" />
+          <ellipse cx="227" cy="62" rx="4" ry="8" fill="${shadow}" />
+
+          <!-- Head Shape -->
+          <path d="M 200 28
+                   C 224 28, 226 48, 225 66
+                   C 224 82, 212 94, 200 96
+                   C 188 94, 176 82, 175 66
+                   C 174 48, 176 28, 200 28
+                   Z"
+                fill="url(#headGrad)" stroke="${shadow}" stroke-width="1.4" />
+
+          <!-- Minimalist Editorial Face Planes & Highlight -->
+          <path d="M 200 36 L 200 74" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-linecap="round" />
+          <path d="M 194 68 Q 200 73, 206 68" fill="none" stroke="rgba(0,0,0,0.18)" stroke-width="1.2" />
         </g>
       </g>
     `;
@@ -172,18 +279,37 @@ export class Mannequin {
   updateColors() {
     const skinGrad = document.getElementById('skinGrad');
     const headGrad = document.getElementById('headGrad');
+    const armLeftGrad = document.getElementById('armLeftGrad');
+    const armRightGrad = document.getElementById('armRightGrad');
+
     if (skinGrad && headGrad) {
-      const { hex, shadow } = this.skinTone;
+      const { hex, shadow, highlight } = this.skinTone;
       skinGrad.innerHTML = `
         <stop offset="0%" stop-color="${shadow}" />
-        <stop offset="50%" stop-color="${hex}" />
+        <stop offset="28%" stop-color="${hex}" />
+        <stop offset="50%" stop-color="${highlight || hex}" />
+        <stop offset="72%" stop-color="${hex}" />
         <stop offset="100%" stop-color="${shadow}" />
       `;
       headGrad.innerHTML = `
-        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.3" />
-        <stop offset="60%" stop-color="${hex}" />
+        <stop offset="0%" stop-color="${highlight || '#ffffff'}" stop-opacity="0.5" />
+        <stop offset="50%" stop-color="${hex}" />
         <stop offset="100%" stop-color="${shadow}" />
       `;
+      if (armLeftGrad) {
+        armLeftGrad.innerHTML = `
+          <stop offset="0%" stop-color="${shadow}" />
+          <stop offset="45%" stop-color="${hex}" />
+          <stop offset="100%" stop-color="${shadow}" stop-opacity="0.8" />
+        `;
+      }
+      if (armRightGrad) {
+        armRightGrad.innerHTML = `
+          <stop offset="0%" stop-color="${shadow}" stop-opacity="0.8" />
+          <stop offset="55%" stop-color="${hex}" />
+          <stop offset="100%" stop-color="${shadow}" />
+        `;
+      }
     }
   }
 }

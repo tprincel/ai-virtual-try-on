@@ -1,10 +1,21 @@
 /**
- * 2D Virtual Try-On - Garment Definition Catalog
- * Precision anatomical SVG paths calibrated for 400x700 mannequin coordinate system.
+ * 2D Virtual Try-On - Redesigned Garment Definition Catalog (Game Avatar Z-Index Architecture)
+ * High-fidelity vector fashion apparel engineered for seamless layering, dynamic drape physics,
+ * and zero-gap anatomical alignment.
+ *
+ * Strict Z-Index Architecture:
+ * - Layer 20: Bottoms (Jeans, Chinos, Cargos, Shorts, Joggers)
+ * - Layer 30: Tops (Tees, Shirts, Turtlenecks, Sweaters, Hoodies)
+ * - Layer 35: Footwear (Sneakers, Chelsea Boots, High-Tops)
+ * - Layer 45: Outerwear (Biker Jackets, Denim Jackets, Trench Coats, Blazers, Vests)
+ * - Layer 55: Torso/Neck Accessories (Cuban Chain, Crossbody Sling)
+ * - Layer 65: Headwear & Eyewear (Dad Cap, Aviator Shades, Cyber Visor)
  */
 
 export const GARMENTS = [
-  // =================== TOPS ===================
+  // =========================================================================
+  // TOPS (Layer 30) - Draped past waistband to Y:295-308 (Zero Midriff Gap)
+  // =========================================================================
   {
     id: 'crew-tshirt',
     name: 'Classic Crewneck T-Shirt',
@@ -14,36 +25,44 @@ export const GARMENTS = [
     defaultColor: '#2563eb',
     availableColors: ['#2563eb', '#1e293b', '#ffffff', '#dc2626', '#059669', '#d97706', '#7c3aed', '#ec4899', '#06b6d4', '#e11d48', '#84cc16', '#facc15', '#6366f1', '#14b8a6'],
     render: (color, fit = 'regular') => {
-      const wMod = fit === 'slim' ? -4 : (fit === 'oversized' ? 7 : 0);
-      const lMod = fit === 'slim' ? -3 : (fit === 'oversized' ? 8 : 0);
+      const wMod = fit === 'slim' ? -3 : (fit === 'oversized' ? 7 : 0);
+      const lMod = fit === 'slim' ? -4 : (fit === 'oversized' ? 8 : 0);
+      const hemY = 298 + lMod;
       return `
         <g id="garment-crew-tshirt" class="garment-group">
-          <!-- Main Torso -->
-          <path d="M ${172 - wMod * 0.5} 115 
-                   C 185 132, 215 132, ${228 + wMod * 0.5} 115
-                   L ${278 + wMod} 135
-                   L ${260 + wMod} 200
-                   L ${245 + wMod} 190
-                   L ${248 + wMod} ${275 + lMod}
-                   C 230 ${280 + lMod}, 170 ${280 + lMod}, ${152 - wMod} ${275 + lMod}
-                   L ${155 - wMod} 190
-                   L ${140 - wMod} 200
-                   L ${122 - wMod} 135
-                   Z" 
-                fill="${color}" stroke="rgba(0,0,0,0.18)" stroke-width="1.5" />
-          
-          <!-- Sleeve Details -->
-          <path d="M ${140 - wMod} 200 L ${155 - wMod} 190" stroke="rgba(0,0,0,0.2)" stroke-width="1.5" />
-          <path d="M ${260 + wMod} 200 L ${245 + wMod} 190" stroke="rgba(0,0,0,0.2)" stroke-width="1.5" />
-          
-          <!-- Crewneck Collar Trim -->
-          <path d="M 172 115 C 185 134, 215 134, 228 115" fill="none" stroke="rgba(0,0,0,0.3)" stroke-width="3" stroke-linecap="round" />
-          <path d="M 173 113 C 185 130, 215 130, 227 113" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
-          
-          <!-- Fabric Shadow & Creases -->
-          <path d="M 160 210 Q 185 240, 175 275" fill="none" stroke="rgba(0,0,0,0.12)" stroke-width="1.5" stroke-linecap="round" />
-          <path d="M 240 210 Q 215 240, 225 275" fill="none" stroke="rgba(0,0,0,0.12)" stroke-width="1.5" stroke-linecap="round" />
-          <path d="M 195 140 Q 192 185, 200 230" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="3" />
+          <!-- Main Torso & Sleeves -->
+          <path d="M ${172 - wMod * 0.4} 116
+                   C 185 128, 215 128, ${228 + wMod * 0.4} 116
+                   L ${278 + wMod} 136
+                   L ${264 + wMod} 204
+                   L ${246 + wMod} 195
+                   L ${250 + wMod} ${hemY}
+                   C 230 ${hemY + 4}, 170 ${hemY + 4}, ${150 - wMod} ${hemY}
+                   L ${154 - wMod} 195
+                   L ${136 - wMod} 204
+                   L ${122 - wMod} 136
+                   Z"
+                fill="${color}" stroke="rgba(0,0,0,0.22)" stroke-width="1.4" />
+
+          <!-- Ribbed Collar Trim -->
+          <path d="M 172 116 C 185 130, 215 130, 228 116" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="3" stroke-linecap="round" />
+          <path d="M 173 114 C 185 127, 215 127, 227 114" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.2" />
+
+          <!-- Sleeve Cuffs & Seams -->
+          <line x1="${136 - wMod}" y1="204" x2="${154 - wMod}" y2="195" stroke="rgba(0,0,0,0.22)" stroke-width="1.5" />
+          <line x1="${264 + wMod}" y1="204" x2="${246 + wMod}" y2="195" stroke="rgba(0,0,0,0.22)" stroke-width="1.5" />
+
+          <!-- Subtle Fabric Draping & Creases -->
+          <path d="M 156 220 Q 180 250, 168 288" fill="none" stroke="rgba(0,0,0,0.12)" stroke-width="1.4" stroke-linecap="round" />
+          <path d="M 244 220 Q 220 250, 232 288" fill="none" stroke="rgba(0,0,0,0.12)" stroke-width="1.4" stroke-linecap="round" />
+          <path d="M 194 140 Q 192 185, 200 230" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2.5" />
+
+          <!-- Bottom Hem Hemline Stitch -->
+          <path d="M ${152 - wMod} ${hemY - 4} C 170 ${hemY}, 230 ${hemY}, ${248 + wMod} ${hemY - 4}" 
+                fill="none" stroke="rgba(0,0,0,0.18)" stroke-width="1.2" stroke-dasharray="3,2" />
+          <!-- Hem Cast Shadow onto Pants -->
+          <path d="M ${150 - wMod} ${hemY} C 170 ${hemY + 4}, 230 ${hemY + 4}, ${250 + wMod} ${hemY} L ${250 + wMod} ${hemY + 3} C 230 ${hemY + 7}, 170 ${hemY + 7}, ${150 - wMod} ${hemY + 3} Z" 
+                fill="rgba(0,0,0,0.18)" />
         </g>
       `;
     }
@@ -58,30 +77,77 @@ export const GARMENTS = [
     availableColors: ['#18181b', '#3f3f46', '#f8fafc', '#7f1d1d', '#14532d', '#ea580c', '#4338ca'],
     render: (color, fit = 'regular') => {
       const wMod = fit === 'slim' ? -3 : (fit === 'oversized' ? 8 : 1);
-      const lMod = fit === 'slim' ? -2 : (fit === 'oversized' ? 7 : 1);
+      const lMod = fit === 'slim' ? -3 : (fit === 'oversized' ? 9 : 1);
+      const hemY = 300 + lMod;
       return `
         <g id="garment-graphic-tee" class="garment-group">
-          <!-- Main Torso -->
-          <path d="M ${172 - wMod * 0.5} 115 
-                   C 185 132, 215 132, ${228 + wMod * 0.5} 115
-                   L ${278 + wMod} 135
-                   L ${260 + wMod} 200
-                   L ${245 + wMod} 190
-                   L ${248 + wMod} ${275 + lMod}
-                   C 230 ${280 + lMod}, 170 ${280 + lMod}, ${152 - wMod} ${275 + lMod}
-                   L ${155 - wMod} 190
-                   L ${140 - wMod} 200
-                   L ${122 - wMod} 135
-                   Z" 
-                fill="${color}" stroke="rgba(0,0,0,0.2)" stroke-width="1.5" />
-          
+          <!-- Torso & Sleeves -->
+          <path d="M ${172 - wMod * 0.4} 116
+                   C 185 128, 215 128, ${228 + wMod * 0.4} 116
+                   L ${278 + wMod} 136
+                   L ${264 + wMod} 204
+                   L ${246 + wMod} 195
+                   L ${250 + wMod} ${hemY}
+                   C 230 ${hemY + 4}, 170 ${hemY + 4}, ${150 - wMod} ${hemY}
+                   L ${154 - wMod} 195
+                   L ${136 - wMod} 204
+                   L ${122 - wMod} 136
+                   Z"
+                fill="${color}" stroke="rgba(0,0,0,0.25)" stroke-width="1.4" />
+
           <!-- Distressed Ribbed Collar -->
-          <path d="M 172 115 C 185 134, 215 134, 228 115" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="3" stroke-linecap="round" />
-          
-          <!-- Vintage Center Graphic Emblem -->
-          <circle cx="200" cy="188" r="22" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3,2" />
-          <polygon points="200,172 205,183 216,183 207,190 210,201 200,194 190,201 193,190 184,183 195,183" fill="#f59e0b" opacity="0.9" />
-          <text x="200" y="222" font-family="-apple-system, sans-serif" font-weight="900" font-size="8" fill="#e2e8f0" text-anchor="middle" letter-spacing="2">NOVA STUDIO</text>
+          <path d="M 172 116 C 185 130, 215 130, 228 116" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="3" stroke-linecap="round" />
+
+          <!-- Vintage Graphic Print (Lightning & Star Emblem) -->
+          <g id="rock-graphic" transform="translate(178, 160)">
+            <polygon points="22,0 12,24 24,24 16,46 34,18 22,18" fill="#fbbf24" opacity="0.9" />
+            <circle cx="22" cy="22" r="18" fill="none" stroke="#f87171" stroke-width="2" stroke-dasharray="4,3" opacity="0.8" />
+            <text x="22" y="54" font-size="7" font-weight="900" fill="#f8fafc" text-anchor="middle" letter-spacing="1">WORLD TOUR</text>
+          </g>
+
+          <!-- Hemline Shadow -->
+          <path d="M ${150 - wMod} ${hemY} C 170 ${hemY + 4}, 230 ${hemY + 4}, ${250 + wMod} ${hemY} L ${250 + wMod} ${hemY + 3} C 230 ${hemY + 7}, 170 ${hemY + 7}, ${150 - wMod} ${hemY + 3} Z" 
+                fill="rgba(0,0,0,0.2)" />
+        </g>
+      `;
+    }
+  },
+  {
+    id: 'linen-vneck',
+    name: 'Summer Linen V-Neck T-Shirt',
+    category: 'tops',
+    layerOrder: 30,
+    price: '$32',
+    defaultColor: '#f1f5f9',
+    availableColors: ['#f1f5f9', '#fed7aa', '#bae6fd', '#dcfce7', '#fbcfe8', '#334155'],
+    render: (color, fit = 'regular') => {
+      const wMod = fit === 'slim' ? -3 : (fit === 'oversized' ? 7 : 0);
+      const lMod = fit === 'slim' ? -3 : (fit === 'oversized' ? 8 : 0);
+      const hemY = 296 + lMod;
+      return `
+        <g id="garment-linen-vneck" class="garment-group">
+          <!-- V-Neck Torso -->
+          <path d="M ${170 - wMod * 0.4} 116
+                   L 200 148
+                   L ${230 + wMod * 0.4} 116
+                   L ${278 + wMod} 136
+                   L ${264 + wMod} 202
+                   L ${246 + wMod} 194
+                   L ${250 + wMod} ${hemY}
+                   C 230 ${hemY + 4}, 170 ${hemY + 4}, ${150 - wMod} ${hemY}
+                   L ${154 - wMod} 194
+                   L ${136 - wMod} 202
+                   L ${122 - wMod} 136
+                   Z"
+                fill="${color}" stroke="rgba(0,0,0,0.18)" stroke-width="1.4" />
+
+          <!-- V-Neck Band Stitching -->
+          <path d="M 170 116 L 200 148 L 230 116" fill="none" stroke="rgba(0,0,0,0.25)" stroke-width="2" stroke-linecap="round" />
+          <path d="M 171 114 L 200 146 L 229 114" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1" />
+
+          <!-- Linen Fabric Slub Texture Creases -->
+          <path d="M 160 215 Q 185 245, 172 284" fill="none" stroke="rgba(0,0,0,0.1)" stroke-width="1.2" />
+          <path d="M 240 215 Q 215 245, 228 284" fill="none" stroke="rgba(0,0,0,0.1)" stroke-width="1.2" />
         </g>
       `;
     }
@@ -91,748 +157,125 @@ export const GARMENTS = [
     name: 'Oversized Striped Skater Tee',
     category: 'tops',
     layerOrder: 30,
-    price: '$32',
+    price: '$36',
     defaultColor: '#1e3a8a',
-    availableColors: ['#1e3a8a', '#18181b', '#065f46', '#991b1b', '#374151'],
+    availableColors: ['#1e3a8a', '#14532d', '#7c2d12', '#312e81', '#18181b', '#0e7490'],
     render: (color, fit = 'regular') => {
-      const wMod = fit === 'slim' ? -2 : (fit === 'oversized' ? 9 : 3);
-      const lMod = fit === 'slim' ? -2 : (fit === 'oversized' ? 8 : 2);
+      const wMod = fit === 'slim' ? 0 : (fit === 'oversized' ? 9 : 4);
+      const lMod = fit === 'slim' ? 0 : (fit === 'oversized' ? 10 : 5);
+      const hemY = 306 + lMod;
       return `
-        <g id="garment-striped-tee" class="garment-group">
-          <!-- Torso Base -->
-          <path d="M ${172 - wMod * 0.5} 115 
-                   C 185 132, 215 132, ${228 + wMod * 0.5} 115
-                   L ${280 + wMod} 135
-                   L ${262 + wMod} 205
-                   L ${245 + wMod} 195
-                   L ${248 + wMod} ${278 + lMod}
-                   C 230 ${283 + lMod}, 170 ${283 + lMod}, ${152 - wMod} ${278 + lMod}
-                   L ${155 - wMod} 195
-                   L ${138 - wMod} 205
-                   L ${120 - wMod} 135
-                   Z" 
-                fill="${color}" stroke="rgba(0,0,0,0.2)" stroke-width="1.5" />
-          
-          <!-- Contrast White Horizontal Stripes -->
-          <line x1="${160 - wMod}" y1="150" x2="${240 + wMod}" y2="150" stroke="#ffffff" stroke-width="6" stroke-opacity="0.8" />
-          <line x1="${155 - wMod}" y1="175" x2="${245 + wMod}" y2="175" stroke="#ffffff" stroke-width="6" stroke-opacity="0.8" />
-          <line x1="${153 - wMod}" y1="200" x2="${247 + wMod}" y2="200" stroke="#ffffff" stroke-width="6" stroke-opacity="0.8" />
-          <line x1="${152 - wMod}" y1="225" x2="${248 + wMod}" y2="225" stroke="#ffffff" stroke-width="6" stroke-opacity="0.8" />
-          <line x1="${152 - wMod}" y1="250" x2="${248 + wMod}" y2="250" stroke="#ffffff" stroke-width="6" stroke-opacity="0.8" />
+        <g id="garment-striped-skater-tee" class="garment-group">
+          <!-- Boxy Oversized Body -->
+          <path d="M ${170 - wMod * 0.4} 116
+                   C 185 128, 215 128, ${230 + wMod * 0.4} 116
+                   L ${282 + wMod} 138
+                   L ${268 + wMod} 220
+                   L ${248 + wMod} 210
+                   L ${252 + wMod} ${hemY}
+                   C 230 ${hemY + 4}, 170 ${hemY + 4}, ${148 - wMod} ${hemY}
+                   L ${152 - wMod} 210
+                   L ${132 - wMod} 220
+                   L ${118 - wMod} 138
+                   Z"
+                fill="${color}" stroke="rgba(0,0,0,0.22)" stroke-width="1.5" />
 
-          <!-- Solid Crewneck Rib -->
-          <path d="M 172 115 C 185 134, 215 134, 228 115" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" />
+          <!-- Horizontal Skater Stripes -->
+          <path d="M 124 150 Q 200 156, 276 150" fill="none" stroke="#f8fafc" stroke-width="6" opacity="0.9" />
+          <path d="M 130 174 Q 200 180, 270 174" fill="none" stroke="#f8fafc" stroke-width="6" opacity="0.9" />
+          <path d="M 148 198 Q 200 204, 252 198" fill="none" stroke="#f8fafc" stroke-width="6" opacity="0.9" />
+          <path d="M 150 222 Q 200 228, 250 222" fill="none" stroke="#f8fafc" stroke-width="6" opacity="0.9" />
+          <path d="M 150 246 Q 200 252, 250 246" fill="none" stroke="#f8fafc" stroke-width="6" opacity="0.9" />
+          <path d="M 150 270 Q 200 276, 250 270" fill="none" stroke="#f8fafc" stroke-width="6" opacity="0.9" />
+
+          <!-- Thick Ribbed Skater Collar -->
+          <path d="M 170 116 C 185 130, 215 130, 230 116" fill="none" stroke="#f8fafc" stroke-width="4" stroke-linecap="round" />
         </g>
       `;
     }
   },
   {
-    id: 'vneck-tee',
-    name: 'Summer Linen V-Neck T-Shirt',
-    category: 'tops',
-    layerOrder: 30,
-    price: '$30',
-    defaultColor: '#f1f5f9',
-    availableColors: ['#f1f5f9', '#cbd5e1', '#059669', '#d97706', '#be185d', '#334155'],
-    render: (color, fit = 'regular') => {
-      const wMod = fit === 'slim' ? -4 : (fit === 'oversized' ? 7 : 0);
-      return `
-        <g id="garment-vneck-tee" class="garment-group">
-          <!-- Torso -->
-          <path d="M 172 115 
-                   L 200 148
-                   L 228 115
-                   L ${278 + wMod} 135
-                   L ${260 + wMod} 200
-                   L ${245 + wMod} 190
-                   L ${248 + wMod} 275
-                   C 230 280, 170 280, ${152 - wMod} 275
-                   L ${155 - wMod} 190
-                   L ${140 - wMod} 200
-                   L ${122 - wMod} 135
-                   Z" 
-                fill="${color}" stroke="rgba(0,0,0,0.18)" stroke-width="1.5" />
-          
-          <!-- V-Neck Band Stitching -->
-          <path d="M 170 114 L 200 148 L 230 114" fill="none" stroke="rgba(0,0,0,0.25)" stroke-width="2" stroke-linecap="round" />
-          <path d="M 172 116 L 200 150 L 228 116" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1" />
-        </g>
-      `;
-    }
-  },
-  {
-    id: 'compression-tee',
+    id: 'dryfit-tee',
     name: 'Athletic Dry-Fit Training Tee',
     category: 'tops',
     layerOrder: 30,
-    price: '$36',
-    defaultColor: '#0f172a',
-    availableColors: ['#0f172a', '#1e40af', '#dc2626', '#eab308', '#f8fafc', '#15803d'],
+    price: '$30',
+    defaultColor: '#0284c7',
+    availableColors: ['#0284c7', '#059669', '#dc2626', '#475569', '#18181b', '#d97706', '#7c3aed'],
     render: (color, fit = 'regular') => {
-      const wMod = fit === 'slim' ? -5 : (fit === 'oversized' ? 5 : -1);
+      const wMod = fit === 'slim' ? -4 : (fit === 'oversized' ? 5 : -1);
+      const lMod = fit === 'slim' ? -3 : (fit === 'oversized' ? 6 : 0);
+      const hemY = 298 + lMod;
       return `
-        <g id="garment-compression-tee" class="garment-group">
+        <g id="garment-dryfit-tee" class="garment-group">
           <!-- Athletic Fitted Torso -->
-          <path d="M 174 116 
-                   C 186 128, 214 128, 226 116
-                   L ${276 + wMod} 136
-                   L ${258 + wMod} 198
-                   L ${244 + wMod} 188
-                   L ${246 + wMod} 272
-                   C 230 276, 170 276, ${154 - wMod} 272
-                   L ${156 - wMod} 188
-                   L ${142 - wMod} 198
-                   L ${124 - wMod} 136
-                   Z" 
-                fill="${color}" stroke="rgba(0,0,0,0.25)" stroke-width="1.5" />
-          
-          <!-- Ergonomic Raglan Seam Curves -->
-          <path d="M 174 116 Q 165 155, ${156 - wMod} 188" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
-          <path d="M 226 116 Q 235 155, ${244 + wMod} 188" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
-          
-          <!-- Chest Reflective Wing Accent -->
-          <polygon points="195,150 205,150 200,154" fill="#38bdf8" />
-          <circle cx="200" cy="146" r="1.5" fill="#38bdf8" />
+          <path d="M ${172 - wMod * 0.4} 116
+                   C 185 128, 215 128, ${228 + wMod * 0.4} 116
+                   L ${278 + wMod} 136
+                   L ${264 + wMod} 200
+                   L ${246 + wMod} 192
+                   L ${248 + wMod} ${hemY}
+                   C 230 ${hemY + 3}, 170 ${hemY + 3}, ${152 - wMod} ${hemY}
+                   L ${154 - wMod} 192
+                   L ${136 - wMod} 200
+                   L ${122 - wMod} 136
+                   Z"
+                fill="${color}" stroke="rgba(0,0,0,0.2)" stroke-width="1.4" />
+
+          <!-- Ergonomic Raglan Shoulder Seams -->
+          <path d="M 176 122 Q 160 160, 154 192" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" />
+          <path d="M 224 122 Q 240 160, 246 192" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" />
+
+          <!-- Breathable Side Mesh Vent Strips -->
+          <path d="M 152 210 L 150 ${hemY}" stroke="rgba(0,0,0,0.25)" stroke-width="3" stroke-linecap="round" />
+          <path d="M 248 210 L 250 ${hemY}" stroke="rgba(0,0,0,0.25)" stroke-width="3" stroke-linecap="round" />
         </g>
       `;
     }
   },
   {
     id: 'oxford-shirt',
-    name: 'Tailored Oxford Button-Down',
+    name: 'Crisp Oxford Button-Down',
     category: 'tops',
     layerOrder: 30,
-    price: '$58',
-    defaultColor: '#f8fafc',
-    availableColors: ['#f8fafc', '#93c5fd', '#fbcfe8', '#334155', '#fed7aa', '#a7f3d0'],
-    render: (color, fit = 'regular') => {
-      const wMod = fit === 'slim' ? -5 : (fit === 'oversized' ? 6 : 0);
-      return `
-        <g id="garment-oxford-shirt" class="garment-group">
-          <!-- Torso -->
-          <path d="M 174 112 
-                   L 200 135
-                   L 226 112
-                   L ${278 + wMod} 133
-                   L ${262 + wMod} 205
-                   L ${246 + wMod} 195
-                   L ${250 + wMod} 285
-                   C 225 292, 175 292, ${150 - wMod} 285
-                   L ${154 - wMod} 195
-                   L ${138 - wMod} 205
-                   L ${122 - wMod} 133
-                   Z" 
-                fill="${color}" stroke="rgba(0,0,0,0.2)" stroke-width="1.5" />
-          
-          <!-- Center Button Placket -->
-          <line x1="200" y1="135" x2="200" y2="288" stroke="rgba(0,0,0,0.15)" stroke-width="7" />
-          <line x1="200" y1="135" x2="200" y2="288" stroke="rgba(0,0,0,0.25)" stroke-width="1" stroke-dasharray="1,4" />
-          
-          <!-- Buttons -->
-          <circle cx="200" cy="155" r="2" fill="#e2e8f0" stroke="#64748b" stroke-width="0.8" />
-          <circle cx="200" cy="180" r="2" fill="#e2e8f0" stroke="#64748b" stroke-width="0.8" />
-          <circle cx="200" cy="205" r="2" fill="#e2e8f0" stroke="#64748b" stroke-width="0.8" />
-          <circle cx="200" cy="230" r="2" fill="#e2e8f0" stroke="#64748b" stroke-width="0.8" />
-          <circle cx="200" cy="255" r="2" fill="#e2e8f0" stroke="#64748b" stroke-width="0.8" />
-          
-          <!-- Collar Lapels -->
-          <polygon points="174,110 188,142 200,135 186,112" fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.2" />
-          <polygon points="226,110 212,142 200,135 214,112" fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.2" />
-          
-          <!-- Chest Pocket -->
-          <path d="M 168 165 L 184 165 L 184 182 L 176 187 L 168 182 Z" fill="none" stroke="rgba(0,0,0,0.18)" stroke-width="1.2" />
-        </g>
-      `;
-    }
-  },
-  {
-    id: 'fleece-hoodie',
-    name: 'Cozy Fleece Pullover Hoodie',
-    category: 'tops',
-    layerOrder: 30,
-    price: '$65',
-    defaultColor: '#475569',
-    availableColors: ['#475569', '#0f172a', '#e2e8f0', '#7c2d12', '#14532d', '#581c87'],
-    render: (color, fit = 'regular') => {
-      const wMod = fit === 'slim' ? 0 : (fit === 'oversized' ? 10 : 4);
-      return `
-        <g id="garment-fleece-hoodie" class="garment-group">
-          <!-- Hood Back -->
-          <path d="M 160 110 C 150 70, 250 70, 240 110 Z" fill="rgba(0,0,0,0.25)" />
-          
-          <!-- Main Body -->
-          <path d="M 168 116 
-                   C 185 130, 215 130, 232 116
-                   L ${284 + wMod} 136
-                   L ${268 + wMod} 225
-                   L ${250 + wMod} 215
-                   L ${254 + wMod} 290
-                   C 230 295, 170 295, ${146 - wMod} 290
-                   L ${150 - wMod} 215
-                   L ${132 - wMod} 225
-                   L ${116 - wMod} 136
-                   Z" 
-                fill="${color}" stroke="rgba(0,0,0,0.25)" stroke-width="1.5" />
-          
-          <!-- Kangaroo Pocket -->
-          <path d="M 168 230 L 232 230 L 240 275 L 160 275 Z" fill="rgba(0,0,0,0.1)" stroke="rgba(0,0,0,0.2)" stroke-width="1.2" />
-          
-          <!-- Drawstrings -->
-          <path d="M 188 128 Q 185 155, 187 180" fill="none" stroke="#f1f5f9" stroke-width="2" stroke-linecap="round" />
-          <path d="M 212 128 Q 215 155, 213 180" fill="none" stroke="#f1f5f9" stroke-width="2" stroke-linecap="round" />
-          <circle cx="187" cy="182" r="2.5" fill="#94a3b8" />
-          <circle cx="213" cy="182" r="2.5" fill="#94a3b8" />
-          
-          <!-- Ribbed Waist Hem -->
-          <rect x="${147 - wMod}" y="282" width="${106 + wMod * 2}" height="10" rx="3" fill="rgba(0,0,0,0.15)" />
-        </g>
-      `;
-    }
-  },
-
-  // =================== BOTTOMS ===================
-  {
-    id: 'slim-jeans',
-    name: 'Slim Fit Denim Jeans',
-    category: 'bottoms',
-    layerOrder: 20,
-    price: '$64',
-    defaultColor: '#1d4ed8',
-    availableColors: ['#1d4ed8', '#1e293b', '#60a5fa', '#0f172a', '#64748b'],
-    render: (color, fit = 'regular') => {
-      const wMod = fit === 'slim' ? -3 : (fit === 'oversized' ? 5 : 0);
-      return `
-        <g id="garment-slim-jeans" class="garment-group">
-          <!-- Waistband -->
-          <path d="M ${146 - wMod} 265 L ${254 + wMod} 265 L ${256 + wMod} 280 L ${144 - wMod} 280 Z" fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.5" />
-          <!-- Belt loops & Button -->
-          <rect x="198" y="267" width="4" height="11" fill="rgba(0,0,0,0.2)" />
-          <circle cx="200" cy="273" r="2.5" fill="#d4af37" stroke="#78350f" stroke-width="0.8" />
-          <line x1="200" y1="280" x2="200" y2="330" stroke="rgba(0,0,0,0.2)" stroke-width="1.5" />
-          
-          <!-- Left Leg -->
-          <path d="M ${144 - wMod} 280 
-                   L ${138 - wMod} 350
-                   L ${144 - wMod} 460
-                   L ${148 - wMod} 595
-                   L 172 595
-                   L 174 460
-                   L 200 330
-                   Z" 
-                fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.5" />
-          
-          <!-- Right Leg -->
-          <path d="M ${256 + wMod} 280 
-                   L ${262 + wMod} 350
-                   L ${256 + wMod} 460
-                   L ${252 + wMod} 595
-                   L 228 595
-                   L 226 460
-                   L 200 330
-                   Z" 
-                fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.5" />
-          
-          <!-- Whiskers & Knee Creases -->
-          <path d="M 152 305 Q 170 320, 192 315" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2" />
-          <path d="M 248 305 Q 230 320, 208 315" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2" />
-          <path d="M 148 455 Q 160 460, 172 455" fill="none" stroke="rgba(0,0,0,0.18)" stroke-width="1.5" />
-          <path d="M 252 455 Q 240 460, 228 455" fill="none" stroke="rgba(0,0,0,0.18)" stroke-width="1.5" />
-          
-          <!-- Hem Cuffs -->
-          <line x1="${148 - wMod}" y1="590" x2="172" y2="590" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
-          <line x1="${252 + wMod}" y1="590" x2="228" y2="590" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
-        </g>
-      `;
-    }
-  },
-  {
-    id: 'chinos',
-    name: 'Pleated Smart Chino Trousers',
-    category: 'bottoms',
-    layerOrder: 20,
-    price: '$55',
-    defaultColor: '#d97706',
-    availableColors: ['#d97706', '#1e293b', '#334155', '#475569', '#15803d', '#ffffff'],
-    render: (color, fit = 'regular') => {
-      const wMod = fit === 'slim' ? -3 : (fit === 'oversized' ? 6 : 0);
-      return `
-        <g id="garment-chinos" class="garment-group">
-          <!-- Waistband -->
-          <rect x="${144 - wMod}" y="265" width="${112 + wMod * 2}" height="14" fill="${color}" stroke="rgba(0,0,0,0.2)" stroke-width="1.2" />
-          
-          <!-- Left Leg -->
-          <path d="M ${144 - wMod} 279 
-                   L ${140 - wMod} 355
-                   L ${146 - wMod} 460
-                   L 150 595
-                   L 174 595
-                   L 176 460
-                   L 200 328
-                   Z" 
-                fill="${color}" stroke="rgba(0,0,0,0.2)" stroke-width="1.2" />
-          
-          <!-- Right Leg -->
-          <path d="M ${256 + wMod} 279 
-                   L ${260 + wMod} 355
-                   L ${254 + wMod} 460
-                   L 250 595
-                   L 226 595
-                   L 224 460
-                   L 200 328
-                   Z" 
-                fill="${color}" stroke="rgba(0,0,0,0.2)" stroke-width="1.2" />
-          
-          <!-- Ironed Center Crease -->
-          <line x1="160" y1="290" x2="162" y2="590" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
-          <line x1="240" y1="290" x2="238" y2="590" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
-          <line x1="159" y1="290" x2="161" y2="590" stroke="rgba(0,0,0,0.15)" stroke-width="0.8" />
-          <line x1="241" y1="290" x2="239" y2="590" stroke="rgba(0,0,0,0.15)" stroke-width="0.8" />
-        </g>
-      `;
-    }
-  },
-  {
-    id: 'bermuda-shorts',
-    name: 'Casual Weekend Shorts',
-    category: 'bottoms',
-    layerOrder: 20,
-    price: '$38',
-    defaultColor: '#0284c7',
-    availableColors: ['#0284c7', '#334155', '#e2e8f0', '#15803d', '#f59e0b'],
-    render: (color, fit = 'regular') => {
-      const wMod = fit === 'slim' ? -3 : (fit === 'oversized' ? 6 : 0);
-      return `
-        <g id="garment-bermuda-shorts" class="garment-group">
-          <!-- Waist -->
-          <rect x="${144 - wMod}" y="265" width="${112 + wMod * 2}" height="14" rx="2" fill="${color}" stroke="rgba(0,0,0,0.2)" stroke-width="1.2" />
-          <!-- Drawstring -->
-          <circle cx="200" cy="272" r="3" fill="#cbd5e1" />
-          <!-- Left Leg Short -->
-          <path d="M ${144 - wMod} 279 L 140 370 L 142 435 L 182 435 L 180 370 L 200 330 Z" fill="${color}" stroke="rgba(0,0,0,0.25)" stroke-width="1.5" />
-          <!-- Right Leg Short -->
-          <path d="M ${256 + wMod} 279 L 260 370 L 258 435 L 218 435 L 220 370 L 200 330 Z" fill="${color}" stroke="rgba(0,0,0,0.25)" stroke-width="1.5" />
-          <!-- Hem Rolled Edge -->
-          <rect x="142" y="428" width="40" height="7" rx="1" fill="rgba(0,0,0,0.15)" />
-          <rect x="218" y="428" width="40" height="7" rx="1" fill="rgba(0,0,0,0.15)" />
-        </g>
-      `;
-    }
-  },
-  {
-    id: 'relaxed-cargo',
-    name: 'Relaxed Tactical Cargo Pants',
-    category: 'bottoms',
-    layerOrder: 20,
-    price: '$68',
-    defaultColor: '#3f3f46',
-    availableColors: ['#3f3f46', '#14532d', '#78350f', '#18181b', '#d97706'],
-    render: (color, fit = 'regular') => {
-      const wMod = fit === 'slim' ? -1 : (fit === 'oversized' ? 8 : 4);
-      return `
-        <g id="garment-relaxed-cargo" class="garment-group">
-          <!-- Waist -->
-          <rect x="${144 - wMod}" y="264" width="${112 + wMod * 2}" height="15" fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.2" />
-          
-          <!-- Left Leg -->
-          <path d="M ${144 - wMod} 279 
-                   L ${136 - wMod} 355
-                   L ${140 - wMod} 460
-                   L ${146 - wMod} 595
-                   L 175 595
-                   L 178 460
-                   L 200 328
-                   Z" 
-                fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.5" />
-          
-          <!-- Right Leg -->
-          <path d="M ${256 + wMod} 279 
-                   L ${264 + wMod} 355
-                   L ${260 + wMod} 460
-                   L ${254 + wMod} 595
-                   L 225 595
-                   L 222 460
-                   L 200 328
-                   Z" 
-                fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.5" />
-          
-          <!-- Side Cargo Pockets with Flaps -->
-          <rect x="${134 - wMod}" y="380" width="22" height="32" rx="2" fill="rgba(0,0,0,0.18)" stroke="rgba(0,0,0,0.3)" stroke-width="1.2" />
-          <polygon points="${133 - wMod},380 ${157 - wMod},380 ${155 - wMod},388 ${135 - wMod},388" fill="${color}" stroke="rgba(0,0,0,0.35)" stroke-width="1" />
-          
-          <rect x="${244 + wMod}" y="380" width="22" height="32" rx="2" fill="rgba(0,0,0,0.18)" stroke="rgba(0,0,0,0.3)" stroke-width="1.2" />
-          <polygon points="${243 + wMod},380 ${267 + wMod},380 ${265 + wMod},388 ${245 + wMod},388" fill="${color}" stroke="rgba(0,0,0,0.35)" stroke-width="1" />
-          
-          <!-- Knee Dart Folds -->
-          <line x1="${145 - wMod}" y1="465" x2="${172 - wMod}" y2="465" stroke="rgba(0,0,0,0.2)" stroke-width="1.5" />
-          <line x1="${255 + wMod}" y1="465" x2="${228 + wMod}" y2="465" stroke="rgba(0,0,0,0.2)" stroke-width="1.5" />
-        </g>
-      `;
-    }
-  },
-
-  // =================== OUTERWEAR ===================
-  {
-    id: 'denim-jacket',
-    name: 'Vintage Trucker Denim Jacket',
-    category: 'outerwear',
-    layerOrder: 40,
-    price: '$89',
-    defaultColor: '#1e40af',
-    availableColors: ['#1e40af', '#1e293b', '#3b82f6', '#374151', '#f3f4f6'],
-    render: (color, fit = 'regular') => {
-      const wMod = fit === 'slim' ? -2 : (fit === 'oversized' ? 8 : 2);
-      return `
-        <g id="garment-denim-jacket" class="garment-group">
-          <!-- Left Flap / Torso -->
-          <path d="M 166 112 
-                   L 190 145
-                   L 188 285
-                   L ${148 - wMod} 280
-                   L ${152 - wMod} 190
-                   L ${132 - wMod} 205
-                   L ${116 - wMod} 133
-                   Z" 
-                fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.8" />
-          
-          <!-- Right Flap / Torso -->
-          <path d="M 234 112 
-                   L 210 145
-                   L 212 285
-                   L ${252 + wMod} 280
-                   L ${248 + wMod} 190
-                   L ${268 + wMod} 205
-                   L ${284 + wMod} 133
-                   Z" 
-                fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.8" />
-          
-          <!-- Collar Points -->
-          <polygon points="166,110 186,145 198,125 178,110" fill="${color}" stroke="rgba(0,0,0,0.4)" stroke-width="1.2" />
-          <polygon points="234,110 214,145 202,125 222,110" fill="${color}" stroke="rgba(0,0,0,0.4)" stroke-width="1.2" />
-          
-          <!-- Flap Pockets -->
-          <rect x="150" y="160" width="26" height="22" rx="2" fill="rgba(0,0,0,0.15)" stroke="rgba(0,0,0,0.25)" stroke-width="1.2" />
-          <circle cx="163" cy="170" r="2" fill="#d4af37" />
-          <rect x="224" y="160" width="26" height="22" rx="2" fill="rgba(0,0,0,0.15)" stroke="rgba(0,0,0,0.25)" stroke-width="1.2" />
-          <circle cx="237" cy="170" r="2" fill="#d4af37" />
-          
-          <!-- Brass Buttons on Placket -->
-          <circle cx="188" cy="180" r="2.5" fill="#d4af37" stroke="#78350f" stroke-width="0.8" />
-          <circle cx="188" cy="210" r="2.5" fill="#d4af37" stroke="#78350f" stroke-width="0.8" />
-          <circle cx="188" cy="240" r="2.5" fill="#d4af37" stroke="#78350f" stroke-width="0.8" />
-          <circle cx="188" cy="270" r="2.5" fill="#d4af37" stroke="#78350f" stroke-width="0.8" />
-        </g>
-      `;
-    }
-  },
-  {
-    id: 'leather-biker',
-    name: 'Asymmetric Leather Biker Jacket',
-    category: 'outerwear',
-    layerOrder: 40,
-    price: '$149',
-    defaultColor: '#18181b',
-    availableColors: ['#18181b', '#78350f', '#3f3f46', '#7f1d1d'],
-    render: (color, fit = 'regular') => {
-      const wMod = fit === 'slim' ? -2 : (fit === 'oversized' ? 7 : 2);
-      return `
-        <g id="garment-leather-biker" class="garment-group">
-          <!-- Main Body -->
-          <path d="M 166 112 
-                   L 175 140
-                   L 218 200
-                   L 205 285
-                   L ${148 - wMod} 280
-                   L ${150 - wMod} 190
-                   L ${132 - wMod} 205
-                   L ${116 - wMod} 133
-                   Z" 
-                fill="${color}" stroke="#000" stroke-width="2" />
-          
-          <path d="M 234 112 
-                   L 205 155
-                   L 218 200
-                   L 205 285
-                   L ${252 + wMod} 280
-                   L ${250 + wMod} 190
-                   L ${268 + wMod} 205
-                   L ${284 + wMod} 133
-                   Z" 
-                fill="${color}" stroke="#000" stroke-width="2" />
-          
-          <!-- Diagonal Chrome Zipper -->
-          <line x1="175" y1="140" x2="205" y2="285" stroke="#e2e8f0" stroke-width="2.5" stroke-dasharray="2,2" />
-          
-          <!-- Biker Notched Lapels with Silver Studs -->
-          <polygon points="166,110 152,142 178,142" fill="${color}" stroke="#000" stroke-width="1.2" />
-          <circle cx="162" cy="138" r="2" fill="#cbd5e1" />
-          <polygon points="234,110 248,142 222,142" fill="${color}" stroke="#000" stroke-width="1.2" />
-          <circle cx="238" cy="138" r="2" fill="#cbd5e1" />
-          
-          <!-- Zipper Pockets -->
-          <line x1="155" y1="230" x2="175" y2="225" stroke="#cbd5e1" stroke-width="1.8" />
-          <line x1="225" y1="230" x2="245" y2="225" stroke="#cbd5e1" stroke-width="1.8" />
-          
-          <!-- Waist Belt Buckle -->
-          <rect x="188" y="278" width="24" height="8" rx="1" fill="#cbd5e1" stroke="#475569" stroke-width="1" />
-        </g>
-      `;
-    }
-  },
-  {
-    id: 'trench-coat',
-    name: 'Double-Breasted Heritage Trench Coat',
-    category: 'outerwear',
-    layerOrder: 40,
-    price: '$175',
-    defaultColor: '#d97706',
-    availableColors: ['#d97706', '#1e293b', '#0f172a', '#78350f', '#f8fafc'],
-    render: (color, fit = 'regular') => {
-      const wMod = fit === 'slim' ? 0 : (fit === 'oversized' ? 10 : 4);
-      return `
-        <g id="garment-trench-coat" class="garment-group">
-          <!-- Main Body Long Silhouette -->
-          <path d="M 164 110 
-                   L 190 148
-                   L 186 460
-                   L ${138 - wMod} 450
-                   L ${148 - wMod} 280
-                   L ${150 - wMod} 190
-                   L ${130 - wMod} 205
-                   L ${114 - wMod} 133
-                   Z" 
-                fill="${color}" stroke="rgba(0,0,0,0.35)" stroke-width="1.8" />
-          
-          <path d="M 236 110 
-                   L 190 152
-                   L 192 460
-                   L ${262 + wMod} 450
-                   L ${252 + wMod} 280
-                   L ${250 + wMod} 190
-                   L ${270 + wMod} 205
-                   L ${286 + wMod} 133
-                   Z" 
-                fill="${color}" stroke="rgba(0,0,0,0.35)" stroke-width="1.8" />
-          
-          <!-- Wide Storm Lapels -->
-          <polygon points="164,108 144,142 192,148 180,108" fill="${color}" stroke="rgba(0,0,0,0.35)" stroke-width="1.2" />
-          <polygon points="236,108 256,142 192,148 220,108" fill="${color}" stroke="rgba(0,0,0,0.35)" stroke-width="1.2" />
-          
-          <!-- Double Breasted Horn Buttons -->
-          <circle cx="182" cy="190" r="3" fill="#1c1917" stroke="#78350f" stroke-width="1" />
-          <circle cx="218" cy="190" r="3" fill="#1c1917" stroke="#78350f" stroke-width="1" />
-          <circle cx="182" cy="230" r="3" fill="#1c1917" stroke="#78350f" stroke-width="1" />
-          <circle cx="218" cy="230" r="3" fill="#1c1917" stroke="#78350f" stroke-width="1" />
-          <circle cx="182" cy="270" r="3" fill="#1c1917" stroke="#78350f" stroke-width="1" />
-          <circle cx="218" cy="270" r="3" fill="#1c1917" stroke="#78350f" stroke-width="1" />
-          
-          <!-- Belt with D-ring Buckle -->
-          <rect x="${146 - wMod}" y="278" width="${108 + wMod * 2}" height="12" fill="rgba(0,0,0,0.2)" stroke="rgba(0,0,0,0.3)" stroke-width="1" />
-          <rect x="194" y="276" width="16" height="16" rx="2" fill="#d4af37" stroke="#78350f" stroke-width="1" />
-        </g>
-      `;
-    }
-  },
-
-  // =================== SHOES ===================
-  {
-    id: 'urban-sneakers',
-    name: 'Minimalist Leather Sneakers',
-    category: 'shoes',
-    layerOrder: 50,
-    price: '$79',
-    defaultColor: '#ffffff',
-    availableColors: ['#ffffff', '#0f172a', '#dc2626', '#10b981', '#f59e0b'],
-    render: (color) => `
-      <g id="garment-urban-sneakers" class="garment-group">
-        <!-- Left Shoe -->
-        <path d="M 148 595 L 140 625 L 132 638 L 134 645 L 175 645 L 174 615 L 168 595 Z" fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.5" />
-        <rect x="132" y="640" width="44" height="6" rx="2" fill="#f8fafc" stroke="rgba(0,0,0,0.3)" stroke-width="1" />
-        <line x1="145" y1="615" x2="162" y2="615" stroke="rgba(0,0,0,0.25)" stroke-width="1.2" />
-        <line x1="147" y1="622" x2="160" y2="622" stroke="rgba(0,0,0,0.25)" stroke-width="1.2" />
-        
-        <!-- Right Shoe -->
-        <path d="M 252 595 L 260 625 L 268 638 L 266 645 L 225 645 L 226 615 L 232 595 Z" fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.5" />
-        <rect x="224" y="640" width="44" height="6" rx="2" fill="#f8fafc" stroke="rgba(0,0,0,0.3)" stroke-width="1" />
-        <line x1="255" y1="615" x2="238" y2="615" stroke="rgba(0,0,0,0.25)" stroke-width="1.2" />
-        <line x1="253" y1="622" x2="240" y2="622" stroke="rgba(0,0,0,0.25)" stroke-width="1.2" />
-      </g>
-    `
-  },
-  {
-    id: 'chelsea-boots',
-    name: 'Suede Chelsea Boots',
-    category: 'shoes',
-    layerOrder: 50,
-    price: '$110',
-    defaultColor: '#78350f',
-    availableColors: ['#78350f', '#1c1917', '#a16207', '#44403c'],
-    render: (color) => `
-      <g id="garment-chelsea-boots" class="garment-group">
-        <!-- Left Boot -->
-        <path d="M 148 580 L 138 625 L 130 642 L 133 648 L 176 648 L 175 615 L 172 580 Z" fill="${color}" stroke="rgba(0,0,0,0.4)" stroke-width="1.5" />
-        <!-- Elastic Gusset -->
-        <polygon points="152,585 162,585 160,615 154,615" fill="#292524" />
-        <!-- Sole & Heel -->
-        <rect x="131" y="644" width="46" height="5" fill="#292524" />
-        <rect x="165" y="646" width="12" height="4" fill="#1c1917" />
-        
-        <!-- Right Boot -->
-        <path d="M 252 580 L 262 625 L 270 642 L 267 648 L 224 648 L 225 615 L 228 580 Z" fill="${color}" stroke="rgba(0,0,0,0.4)" stroke-width="1.5" />
-        <!-- Elastic Gusset -->
-        <polygon points="248,585 238,585 240,615 246,615" fill="#292524" />
-        <!-- Sole & Heel -->
-        <rect x="223" y="644" width="46" height="5" fill="#292524" />
-        <rect x="223" y="646" width="12" height="4" fill="#1c1917" />
-      </g>
-    `
-  },
-
-  // =================== ACCESSORIES ===================
-  {
-    id: 'aviator-shades',
-    name: 'Classic Aviator Sunglasses',
-    category: 'accessories',
-    layerOrder: 60,
     price: '$45',
-    defaultColor: '#0f172a',
-    availableColors: ['#0f172a', '#78350f', '#0284c7', '#059669'],
-    render: (color) => `
-      <g id="garment-aviator-shades" class="garment-group">
-        <!-- Left Lens -->
-        <path d="M 182 52 C 182 45, 196 45, 196 52 C 196 62, 185 64, 182 58 Z" fill="${color}" fill-opacity="0.85" stroke="#d4af37" stroke-width="1.5" />
-        <path d="M 185 49 L 191 58" stroke="rgba(255,255,255,0.4)" stroke-width="1" />
-        
-        <!-- Right Lens -->
-        <path d="M 218 52 C 218 45, 204 45, 204 52 C 204 62, 215 64, 218 58 Z" fill="${color}" fill-opacity="0.85" stroke="#d4af37" stroke-width="1.5" />
-        <path d="M 209 49 L 215 58" stroke="rgba(255,255,255,0.4)" stroke-width="1" />
-        
-        <!-- Bridge & Temples -->
-        <line x1="196" y1="50" x2="204" y2="50" stroke="#d4af37" stroke-width="1.5" />
-        <line x1="196" y1="46" x2="204" y2="46" stroke="#d4af37" stroke-width="1" />
-        <line x1="182" y1="50" x2="174" y2="48" stroke="#d4af37" stroke-width="1.5" />
-        <line x1="218" y1="50" x2="226" y2="48" stroke="#d4af37" stroke-width="1.5" />
-      </g>
-    `
-  },
-  {
-    id: 'baseball-cap',
-    name: 'Embroidered Dad Cap',
-    category: 'accessories',
-    layerOrder: 60,
-    price: '$25',
-    defaultColor: '#1e293b',
-    availableColors: ['#1e293b', '#dc2626', '#166534', '#1e40af', '#ffffff'],
-    render: (color) => `
-      <g id="garment-baseball-cap" class="garment-group">
-        <!-- Crown Dome -->
-        <path d="M 170 48 C 170 20, 230 20, 230 48 Z" fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.5" />
-        <!-- Top Button -->
-        <circle cx="200" cy="22" r="3" fill="rgba(0,0,0,0.3)" />
-        <!-- Curved Brim/Visor -->
-        <path d="M 166 46 C 185 40, 215 40, 234 46 C 248 55, 225 58, 200 58 C 175 58, 152 55, 166 46 Z" fill="${color}" stroke="rgba(0,0,0,0.4)" stroke-width="1.5" />
-        <path d="M 172 47 C 185 43, 215 43, 228 47" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
-      </g>
-    `
-  },
-  {
-    id: 'gold-chain',
-    name: 'Cuban Link Chain Necklace',
-    category: 'accessories',
-    layerOrder: 60,
-    price: '$85',
-    defaultColor: '#d4af37',
-    availableColors: ['#d4af37', '#e2e8f0', '#78350f'],
-    render: (color) => `
-      <g id="garment-gold-chain" class="garment-group">
-        <!-- Choker / Collar drape chain around neck -->
-        <path d="M 184 108 C 185 130, 215 130, 216 108" fill="none" stroke="${color}" stroke-width="2.5" stroke-dasharray="2,2" stroke-linecap="round" />
-        <circle cx="200" cy="128" r="2.5" fill="${color}" />
-      </g>
-    `
-  },
-  {
-    id: 'blazer-double-breasted',
-    name: 'Tailored Double-Breasted Blazer',
-    category: 'outerwear',
-    layerOrder: 45,
-    price: '$145',
-    defaultColor: '#1e293b',
-    availableColors: ['#1e293b', '#0f172a', '#334155', '#475569', '#78350f', '#064e3b', '#4c1d95', '#ffffff'],
+    defaultColor: '#f8fafc',
+    availableColors: ['#f8fafc', '#bfdbfe', '#e2e8f0', '#fed7aa', '#1e293b'],
     render: (color, fit = 'regular') => {
       const wMod = fit === 'slim' ? -3 : (fit === 'oversized' ? 7 : 0);
-      const lMod = fit === 'slim' ? -2 : (fit === 'oversized' ? 8 : 0);
+      const lMod = fit === 'slim' ? -3 : (fit === 'oversized' ? 8 : 0);
+      const hemY = 302 + lMod;
       return `
-        <g id="garment-blazer-db" class="garment-group">
-          <!-- Main Blazer Body -->
-          <path d="M ${166 - wMod * 0.5} 112 
-                   L ${284 + wMod} 132
-                   L ${268 + wMod} 265
-                   L ${250 + wMod} 255
-                   L ${252 + wMod} ${298 + lMod}
-                   C 225 ${303 + lMod}, 175 ${303 + lMod}, ${148 - wMod} ${298 + lMod}
-                   L ${150 - wMod} 255
-                   L ${132 - wMod} 265
-                   L ${116 - wMod} 132
-                   Z" 
-                fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.6" />
-          
-          <!-- Satin Peak Lapels -->
-          <path d="M 172 114 L 188 178 L 160 172 L 198 245 L 200 245 L 238 172 L 210 178 L 228 114 Z" 
-                fill="rgba(0,0,0,0.22)" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
-          
-          <!-- Double-Breasted Brass Buttons -->
-          <circle cx="188" cy="225" r="3" fill="#d4af37" stroke="#92400e" stroke-width="0.8" />
-          <circle cx="212" cy="225" r="3" fill="#d4af37" stroke="#92400e" stroke-width="0.8" />
-          <circle cx="188" cy="245" r="3" fill="#d4af37" stroke="#92400e" stroke-width="0.8" />
-          <circle cx="212" cy="245" r="3" fill="#d4af37" stroke="#92400e" stroke-width="0.8" />
-          
-          <!-- Welt Pockets -->
-          <line x1="160" y1="262" x2="182" y2="262" stroke="rgba(0,0,0,0.35)" stroke-width="2.5" stroke-linecap="round" />
-          <line x1="218" y1="262" x2="240" y2="262" stroke="rgba(0,0,0,0.35)" stroke-width="2.5" stroke-linecap="round" />
-          
-          <!-- Silk Sheen Overlay -->
-          <path d="M 166 114 L 200 245 L 148 298 Z" fill="url(#silkSheen)" opacity="0.6" />
-        </g>
-      `;
-    }
-  },
-  {
-    id: 'puffer-vest',
-    name: 'Quilted Down Puffer Vest',
-    category: 'outerwear',
-    layerOrder: 45,
-    price: '$88',
-    defaultColor: '#0f172a',
-    availableColors: ['#0f172a', '#1e3a8a', '#15803d', '#b91c1c', '#c2410c', '#e2e8f0'],
-    render: (color, fit = 'regular') => {
-      const wMod = fit === 'slim' ? -2 : (fit === 'oversized' ? 8 : 2);
-      return `
-        <g id="garment-puffer-vest" class="garment-group">
-          <!-- High Puffer Storm Collar -->
-          <path d="M 174 100 C 185 106, 215 106, 226 100 L 228 116 C 215 120, 185 120, 172 116 Z" 
-                fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.5" />
-          
-          <!-- Sleeveless Vest Body -->
-          <path d="M 172 116 
-                   C 185 122, 215 122, 228 116
-                   L ${250 + wMod} 136
-                   L ${246 + wMod} 190
-                   L ${248 + wMod} 275
-                   C 225 280, 175 280, ${152 - wMod} 275
-                   L ${154 - wMod} 190
-                   L ${150 - wMod} 136
-                   Z" 
-                fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.5" />
-          
-          <!-- Horizontal Baffle Quilting Lines -->
-          <path d="M 152 150 Q 200 156, 248 150" fill="none" stroke="rgba(0,0,0,0.3)" stroke-width="2.5" />
-          <path d="M 153 180 Q 200 186, 247 180" fill="none" stroke="rgba(0,0,0,0.3)" stroke-width="2.5" />
-          <path d="M 153 210 Q 200 216, 247 210" fill="none" stroke="rgba(0,0,0,0.3)" stroke-width="2.5" />
-          <path d="M 152 240 Q 200 246, 248 240" fill="none" stroke="rgba(0,0,0,0.3)" stroke-width="2.5" />
-          
-          <!-- Center Waterproof Zip Baffle -->
-          <line x1="200" y1="102" x2="200" y2="278" stroke="rgba(0,0,0,0.4)" stroke-width="3" />
-          <circle cx="200" cy="120" r="2.2" fill="#94a3b8" />
+        <g id="garment-oxford-shirt" class="garment-group">
+          <!-- Torso with Curved Shirt Hem -->
+          <path d="M 174 116
+                   L ${278 + wMod} 136
+                   L ${264 + wMod} 210
+                   L ${246 + wMod} 202
+                   L ${250 + wMod} ${hemY}
+                   C 230 ${hemY + 6}, 170 ${hemY + 6}, ${150 - wMod} ${hemY}
+                   L ${154 - wMod} 202
+                   L ${136 - wMod} 210
+                   L ${122 - wMod} 136
+                   Z"
+                fill="${color}" stroke="rgba(0,0,0,0.22)" stroke-width="1.4" />
+
+          <!-- Pointed Button-Down Collars -->
+          <polygon points="174,116 192,136 186,116" fill="${color}" stroke="rgba(0,0,0,0.25)" stroke-width="1.2" />
+          <polygon points="226,116 208,136 214,116" fill="${color}" stroke="rgba(0,0,0,0.25)" stroke-width="1.2" />
+
+          <!-- Front Button Placket -->
+          <rect x="196" y="118" width="8" height="${hemY - 116}" fill="rgba(0,0,0,0.04)" stroke="rgba(0,0,0,0.18)" stroke-width="1" />
+          <!-- Buttons -->
+          <circle cx="200" cy="140" r="1.8" fill="#f8fafc" stroke="#64748b" stroke-width="0.8" />
+          <circle cx="200" cy="170" r="1.8" fill="#f8fafc" stroke="#64748b" stroke-width="0.8" />
+          <circle cx="200" cy="200" r="1.8" fill="#f8fafc" stroke="#64748b" stroke-width="0.8" />
+          <circle cx="200" cy="230" r="1.8" fill="#f8fafc" stroke="#64748b" stroke-width="0.8" />
+          <circle cx="200" cy="260" r="1.8" fill="#f8fafc" stroke="#64748b" stroke-width="0.8" />
+          <circle cx="200" cy="290" r="1.8" fill="#f8fafc" stroke="#64748b" stroke-width="0.8" />
+
+          <!-- Left Chest Pocket -->
+          <rect x="166" y="165" width="20" height="22" rx="2" fill="none" stroke="rgba(0,0,0,0.2)" stroke-width="1.2" />
         </g>
       `;
     }
@@ -846,29 +289,178 @@ export const GARMENTS = [
     defaultColor: '#f1f5f9',
     availableColors: ['#f1f5f9', '#0f172a', '#1e293b', '#78350f', '#064e3b', '#831843'],
     render: (color, fit = 'regular') => {
-      const wMod = fit === 'slim' ? -3 : (fit === 'oversized' ? 6 : 0);
+      const wMod = fit === 'slim' ? -3 : (fit === 'oversized' ? 7 : 0);
+      const hemY = 300;
       return `
         <g id="garment-merino-turtleneck" class="garment-group">
           <!-- Rollneck Collar -->
-          <rect x="180" y="94" width="40" height="24" rx="4" fill="${color}" stroke="rgba(0,0,0,0.25)" stroke-width="1.5" />
-          <line x1="180" y1="106" x2="220" y2="106" stroke="rgba(0,0,0,0.18)" stroke-width="1" />
-          
-          <!-- Torso & Sleeves -->
-          <path d="M 180 114 
-                   L ${278 + wMod} 135
-                   L ${260 + wMod} 255
-                   L ${245 + wMod} 250
-                   L ${248 + wMod} 276
-                   C 230 280, 170 280, ${152 - wMod} 276
-                   L ${155 - wMod} 250
-                   L ${140 - wMod} 255
-                   L ${122 - wMod} 135
-                   Z" 
-                fill="${color}" stroke="rgba(0,0,0,0.2)" stroke-width="1.5" />
-          
-          <!-- Knit Ribbing Texture Overlay -->
-          <rect x="180" y="94" width="40" height="24" fill="url(#knitRibbing)" opacity="0.4" />
-          <path d="M 152 268 C 170 272, 230 272, 248 268 L 248 276 C 230 280, 170 280, 152 276 Z" fill="url(#knitRibbing)" opacity="0.6" />
+          <rect x="180" y="94" width="40" height="26" rx="4" fill="${color}" stroke="rgba(0,0,0,0.25)" stroke-width="1.4" />
+          <line x1="180" y1="107" x2="220" y2="107" stroke="rgba(0,0,0,0.2)" stroke-width="1" />
+          <rect x="180" y="94" width="40" height="26" fill="url(#knitRibbing)" opacity="0.45" />
+
+          <!-- Torso & Long Sleeves -->
+          <path d="M 180 118
+                   L ${278 + wMod} 136
+                   L ${264 + wMod} 260
+                   L ${246 + wMod} 255
+                   L ${250 + wMod} ${hemY}
+                   C 230 ${hemY + 4}, 170 ${hemY + 4}, ${150 - wMod} ${hemY}
+                   L ${154 - wMod} 255
+                   L ${136 - wMod} 260
+                   L ${122 - wMod} 136
+                   Z"
+                fill="${color}" stroke="rgba(0,0,0,0.2)" stroke-width="1.4" />
+
+          <!-- Knit Ribbed Hem -->
+          <path d="M ${150 - wMod} ${hemY - 8} C 170 ${hemY - 4}, 230 ${hemY - 4}, ${250 + wMod} ${hemY - 8} L ${250 + wMod} ${hemY} C 230 ${hemY + 4}, 170 ${hemY + 4}, ${150 - wMod} ${hemY} Z" 
+                fill="url(#knitRibbing)" opacity="0.6" />
+        </g>
+      `;
+    }
+  },
+
+  // =========================================================================
+  // BOTTOMS (Layer 20) - Waistband at Y:258-272, Inseam to Ankles Y:610-618
+  // =========================================================================
+  {
+    id: 'slim-jeans',
+    name: 'Tailored Slim Denim Jeans',
+    category: 'bottoms',
+    layerOrder: 20,
+    price: '$55',
+    defaultColor: '#1d4ed8',
+    availableColors: ['#1d4ed8', '#1e293b', '#0f172a', '#475569', '#3b82f6', '#f8fafc'],
+    render: (color, fit = 'regular') => {
+      const wMod = fit === 'slim' ? -3 : (fit === 'oversized' ? 7 : 0);
+      return `
+        <g id="garment-slim-jeans" class="garment-group">
+          <!-- Pants Base Silhouette -->
+          <path d="M 148 260
+                   C 170 264, 230 264, 252 260
+                   L ${258 + wMod} 325
+                   L ${248 + wMod} 455
+                   L ${240 + wMod} 612
+                   L 224 612
+                   L 204 322
+                   L 196 322
+                   L 176 612
+                   L 160 612
+                   L ${152 - wMod} 455
+                   L ${142 - wMod} 325
+                   Z"
+                fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.5" />
+
+          <!-- Diagonal Denim Twill Texture -->
+          <path d="M 148 260 C 170 264, 230 264, 252 260 L ${258 + wMod} 325 L ${240 + wMod} 612 L 160 612 L ${142 - wMod} 325 Z" 
+                fill="url(#denimTwill)" opacity="0.3" />
+
+          <!-- Waistband & Copper Rivet Button -->
+          <path d="M 148 260 C 170 264, 230 264, 252 260 L 253 268 C 230 272, 170 272, 147 268 Z" 
+                fill="rgba(0,0,0,0.15)" stroke="#d97706" stroke-width="1.2" />
+          <circle cx="200" cy="264" r="2.5" fill="#f59e0b" stroke="#78350f" stroke-width="0.8" />
+
+          <!-- Fly & Front Coin Pockets -->
+          <line x1="200" y1="268" x2="200" y2="305" stroke="#d97706" stroke-width="1.5" />
+          <path d="M 200 305 Q 206 314, 204 322" fill="none" stroke="#d97706" stroke-width="1.5" />
+          <path d="M 149 268 Q 166 270, 168 285" fill="none" stroke="#d97706" stroke-width="1.4" />
+          <path d="M 251 268 Q 234 270, 232 285" fill="none" stroke="#d97706" stroke-width="1.4" />
+
+          <!-- Knee Whiskers & Ankle Creases -->
+          <path d="M 152 450 Q 164 456, 172 452" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.4" />
+          <path d="M 248 450 Q 236 456, 228 452" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.4" />
+          <line x1="160" y1="608" x2="176" y2="608" stroke="#d97706" stroke-width="1.2" stroke-dasharray="3,1" />
+          <line x1="224" y1="608" x2="240" y2="608" stroke="#d97706" stroke-width="1.2" stroke-dasharray="3,1" />
+        </g>
+      `;
+    }
+  },
+  {
+    id: 'chinos',
+    name: 'Smart Casual Tailored Chinos',
+    category: 'bottoms',
+    layerOrder: 20,
+    price: '$48',
+    defaultColor: '#d97706',
+    availableColors: ['#d97706', '#1e293b', '#475569', '#15803d', '#f1f5f9', '#78350f'],
+    render: (color, fit = 'regular') => {
+      const wMod = fit === 'slim' ? -3 : (fit === 'oversized' ? 7 : 0);
+      return `
+        <g id="garment-chinos" class="garment-group">
+          <!-- Pants Silhouette -->
+          <path d="M 148 260
+                   C 170 264, 230 264, 252 260
+                   L ${258 + wMod} 325
+                   L ${248 + wMod} 455
+                   L ${240 + wMod} 612
+                   L 224 612
+                   L 204 322
+                   L 196 322
+                   L 176 612
+                   L 160 612
+                   L ${152 - wMod} 455
+                   L ${142 - wMod} 325
+                   Z"
+                fill="${color}" stroke="rgba(0,0,0,0.25)" stroke-width="1.4" />
+
+          <!-- Waistband & Horn Button -->
+          <path d="M 148 260 C 170 264, 230 264, 252 260 L 253 268 C 230 272, 170 272, 147 268 Z" 
+                fill="rgba(0,0,0,0.12)" stroke="rgba(0,0,0,0.2)" stroke-width="1.2" />
+          <circle cx="200" cy="264" r="2.2" fill="#451a03" />
+
+          <!-- Clean Slant Pockets -->
+          <line x1="150" y1="268" x2="164" y2="295" stroke="rgba(0,0,0,0.25)" stroke-width="1.5" />
+          <line x1="250" y1="268" x2="236" y2="295" stroke="rgba(0,0,0,0.25)" stroke-width="1.5" />
+
+          <!-- Center Pressed Crease Lines -->
+          <line x1="168" y1="310" x2="168" y2="605" stroke="rgba(255,255,255,0.12)" stroke-width="1.2" />
+          <line x1="232" y1="310" x2="232" y2="605" stroke="rgba(255,255,255,0.12)" stroke-width="1.2" />
+        </g>
+      `;
+    }
+  },
+  {
+    id: 'relaxed-cargo',
+    name: 'Relaxed Streetwear Cargo Pants',
+    category: 'bottoms',
+    layerOrder: 20,
+    price: '$58',
+    defaultColor: '#3f3f46',
+    availableColors: ['#3f3f46', '#18181b', '#365314', '#713f12', '#1e293b'],
+    render: (color, fit = 'regular') => {
+      const wMod = fit === 'slim' ? -1 : (fit === 'oversized' ? 9 : 3);
+      return `
+        <g id="garment-cargo-pants" class="garment-group">
+          <!-- Baggy Cargo Pants Base -->
+          <path d="M 148 260
+                   C 170 264, 230 264, 252 260
+                   L ${260 + wMod} 325
+                   L ${252 + wMod} 460
+                   L ${244 + wMod} 614
+                   L 224 614
+                   L 204 322
+                   L 196 322
+                   L 176 614
+                   L 156 614
+                   L ${148 - wMod} 460
+                   L ${140 - wMod} 325
+                   Z"
+                fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.5" />
+
+          <!-- Side 3D Bellows Cargo Pockets with Flap -->
+          <g id="left-cargo-pocket">
+            <rect x="${134 - wMod}" y="365" width="22" height="34" rx="2" fill="rgba(0,0,0,0.18)" stroke="rgba(0,0,0,0.3)" stroke-width="1.2" />
+            <polygon points="${134 - wMod},365 ${156 - wMod},365 ${152 - wMod},375 ${138 - wMod},375" fill="rgba(0,0,0,0.35)" />
+            <circle cx="${145 - wMod}" cy="378" r="1.5" fill="#94a3b8" />
+          </g>
+          <g id="right-cargo-pocket">
+            <rect x="${244 + wMod}" y="365" width="22" height="34" rx="2" fill="rgba(0,0,0,0.18)" stroke="rgba(0,0,0,0.3)" stroke-width="1.2" />
+            <polygon points="${244 + wMod},365 ${266 + wMod},365 ${262 + wMod},375 ${248 + wMod},375" fill="rgba(0,0,0,0.35)" />
+            <circle cx="${255 + wMod}" cy="378" r="1.5" fill="#94a3b8" />
+          </g>
+
+          <!-- Articulated Knee Pleats -->
+          <path d="M 148 450 Q 164 456, 172 450" fill="none" stroke="rgba(0,0,0,0.25)" stroke-width="1.5" />
+          <path d="M 252 450 Q 236 456, 228 450" fill="none" stroke="rgba(0,0,0,0.25)" stroke-width="1.5" />
         </g>
       `;
     }
@@ -886,57 +478,432 @@ export const GARMENTS = [
       return `
         <g id="garment-tech-jogger" class="garment-group">
           <!-- Pants Silhouette with Articulated Knees -->
-          <path d="M 150 268 
-                   C 170 272, 230 272, 250 268
-                   L ${258 + wMod} 330
-                   L ${246 + wMod} 480
-                   L ${238 + wMod} 600
-                   L 218 600
-                   L 204 330
-                   L 196 330
-                   L 182 600
-                   L 162 600
-                   L ${154 - wMod} 480
-                   L ${142 - wMod} 330
-                   Z" 
-                fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.5" />
-          
-          <!-- Tactical Webbing Straps -->
+          <path d="M 148 260
+                   C 170 264, 230 264, 252 260
+                   L ${258 + wMod} 325
+                   L ${246 + wMod} 465
+                   L ${238 + wMod} 606
+                   L 218 606
+                   L 204 322
+                   L 196 322
+                   L 182 606
+                   L 162 606
+                   L ${154 - wMod} 465
+                   L ${142 - wMod} 325
+                   Z"
+                fill="${color}" stroke="rgba(0,0,0,0.35)" stroke-width="1.5" />
+
+          <!-- Tactical Contrast Webbing Straps -->
           <path d="M 144 380 Q 170 410, 160 450" fill="none" stroke="#f59e0b" stroke-width="2.5" />
           <path d="M 256 380 Q 230 410, 240 450" fill="none" stroke="#f59e0b" stroke-width="2.5" />
-          
-          <!-- Tactical Cargo Bellows Pockets -->
-          <rect x="136" y="385" width="18" height="28" rx="2" fill="rgba(0,0,0,0.25)" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-          <rect x="246" y="385" width="18" height="28" rx="2" fill="rgba(0,0,0,0.25)" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-          
-          <!-- Ribbed Ankle Cuffs -->
-          <rect x="162" y="594" width="20" height="8" rx="2" fill="#09090b" />
-          <rect x="218" y="594" width="20" height="8" rx="2" fill="#09090b" />
+
+          <!-- Tactical Bellows Pockets with Buckle -->
+          <rect x="136" y="385" width="18" height="28" rx="2" fill="rgba(0,0,0,0.3)" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+          <rect x="246" y="385" width="18" height="28" rx="2" fill="rgba(0,0,0,0.3)" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+
+          <!-- Compression Ribbed Ankle Cuffs -->
+          <rect x="162" y="600" width="20" height="8" rx="2" fill="#09090b" stroke="#3f3f46" stroke-width="1" />
+          <rect x="218" y="600" width="20" height="8" rx="2" fill="#09090b" stroke="#3f3f46" stroke-width="1" />
         </g>
       `;
     }
   },
   {
+    id: 'bermuda-shorts',
+    name: 'Tailored Weekend Bermuda Shorts',
+    category: 'bottoms',
+    layerOrder: 20,
+    price: '$38',
+    defaultColor: '#334155',
+    availableColors: ['#334155', '#d97706', '#1e293b', '#166534', '#f1f5f9'],
+    render: (color, fit = 'regular') => {
+      const wMod = fit === 'slim' ? -3 : (fit === 'oversized' ? 7 : 0);
+      return `
+        <g id="garment-bermuda-shorts" class="garment-group">
+          <!-- Short Base ending at Y:435 -->
+          <path d="M 148 260
+                   C 170 264, 230 264, 252 260
+                   L ${258 + wMod} 325
+                   L ${254 + wMod} 435
+                   L 220 435
+                   L 204 322
+                   L 196 322
+                   L 180 435
+                   L ${146 - wMod} 435
+                   L ${142 - wMod} 325
+                   Z"
+                fill="${color}" stroke="rgba(0,0,0,0.25)" stroke-width="1.4" />
+
+          <!-- Rolled Hem Cuffs -->
+          <rect x="${146 - wMod}" y="428" width="${34 + wMod}" height="7" rx="1" fill="rgba(0,0,0,0.15)" />
+          <rect x="220" y="428" width="${34 + wMod}" height="7" rx="1" fill="rgba(0,0,0,0.15)" />
+        </g>
+      `;
+    }
+  },
+
+  // =========================================================================
+  // FOOTWEAR (Layer 35) - Ankles Y:595 to Soles Y:644 Grounded on Floor
+  // =========================================================================
+  {
+    id: 'urban-sneakers',
+    name: 'Minimalist Leather Sneakers',
+    category: 'shoes',
+    layerOrder: 35,
+    price: '$75',
+    defaultColor: '#ffffff',
+    availableColors: ['#ffffff', '#0f172a', '#dc2626', '#2563eb', '#16a34a', '#d97706'],
+    render: (color) => `
+      <g id="garment-urban-sneakers" class="garment-group">
+        <!-- Left Sneaker -->
+        <path d="M 152 610 L 176 610 L 178 632 L 182 642 L 138 642 L 142 630 Z" fill="${color}" stroke="rgba(0,0,0,0.2)" stroke-width="1.2" />
+        <!-- Left Sole -->
+        <path d="M 136 638 L 184 638 L 182 645 L 138 645 Z" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" />
+        <!-- Laces & Eyelet Stay -->
+        <line x1="150" y1="616" x2="168" y2="616" stroke="#94a3b8" stroke-width="1.5" />
+        <line x1="152" y1="622" x2="166" y2="622" stroke="#94a3b8" stroke-width="1.5" />
+
+        <!-- Right Sneaker -->
+        <path d="M 224 610 L 248 610 L 258 630 L 262 642 L 218 642 L 222 632 Z" fill="${color}" stroke="rgba(0,0,0,0.2)" stroke-width="1.2" />
+        <!-- Right Sole -->
+        <path d="M 216 638 L 264 638 L 262 645 L 218 645 Z" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" />
+        <!-- Laces & Eyelet Stay -->
+        <line x1="232" y1="616" x2="250" y2="616" stroke="#94a3b8" stroke-width="1.5" />
+        <line x1="234" y1="622" x2="248" y2="622" stroke="#94a3b8" stroke-width="1.5" />
+      </g>
+    `
+  },
+  {
+    id: 'chelsea-boots',
+    name: 'Suede Chelsea Boots',
+    category: 'shoes',
+    layerOrder: 35,
+    price: '$120',
+    defaultColor: '#78350f',
+    availableColors: ['#78350f', '#1c1917', '#451a03', '#57534e', '#a16207'],
+    render: (color) => `
+      <g id="garment-chelsea-boots" class="garment-group">
+        <!-- Left Boot Shaft & Vamp -->
+        <path d="M 152 594 L 176 594 L 178 628 L 182 642 L 138 642 L 142 626 Z" fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.2" />
+        <!-- Elastic Side Gusset -->
+        <polygon points="158,598 170,598 166,618 162,618" fill="#18181b" />
+        <!-- Stacked Heel & Welt -->
+        <path d="M 138 638 L 182 638 L 180 645 L 140 645 Z" fill="#451a03" stroke="#291305" stroke-width="1" />
+
+        <!-- Right Boot Shaft & Vamp -->
+        <path d="M 224 594 L 248 594 L 258 626 L 262 642 L 222 642 L 222 628 Z" fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.2" />
+        <!-- Elastic Side Gusset -->
+        <polygon points="230,598 242,598 238,618 234,618" fill="#18181b" />
+        <!-- Stacked Heel & Welt -->
+        <path d="M 218 638 L 262 638 L 260 645 L 220 645 Z" fill="#451a03" stroke="#291305" stroke-width="1" />
+      </g>
+    `
+  },
+  {
     id: 'retro-high-top-sneakers',
     name: 'Retro Color-Blocked High-Tops',
     category: 'shoes',
-    layerOrder: 10,
+    layerOrder: 35,
     price: '$110',
     defaultColor: '#dc2626',
     availableColors: ['#dc2626', '#2563eb', '#16a34a', '#0f172a', '#9333ea', '#ea580c'],
     render: (color) => `
       <g id="garment-retro-dunks" class="garment-group">
         <!-- Left High-Top -->
-        <path d="M 152 590 L 176 590 L 178 625 L 180 638 L 138 638 L 144 610 Z" fill="${color}" stroke="rgba(0,0,0,0.25)" stroke-width="1" />
-        <path d="M 148 600 L 172 600 L 174 624 L 144 624 Z" fill="#ffffff" />
+        <path d="M 152 590 L 176 590 L 178 625 L 182 642 L 138 642 L 142 612 Z" fill="${color}" stroke="rgba(0,0,0,0.25)" stroke-width="1" />
+        <path d="M 148 602 L 172 602 L 174 624 L 144 624 Z" fill="#ffffff" />
         <!-- Left Rubber Cupsole -->
-        <path d="M 136 634 L 182 634 L 180 642 L 138 642 Z" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" />
-        
+        <path d="M 136 636 L 184 636 L 182 645 L 138 645 Z" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" />
+
         <!-- Right High-Top -->
-        <path d="M 224 590 L 248 590 L 256 610 L 262 638 L 220 638 L 222 625 Z" fill="${color}" stroke="rgba(0,0,0,0.25)" stroke-width="1" />
-        <path d="M 228 600 L 252 600 L 256 624 L 226 624 Z" fill="#ffffff" />
+        <path d="M 224 590 L 248 590 L 258 612 L 262 642 L 218 642 L 222 625 Z" fill="${color}" stroke="rgba(0,0,0,0.25)" stroke-width="1" />
+        <path d="M 228 602 L 252 602 L 256 624 L 226 624 Z" fill="#ffffff" />
         <!-- Right Rubber Cupsole -->
-        <path d="M 218 634 L 264 634 L 262 642 L 220 642 Z" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" />
+        <path d="M 216 636 L 264 636 L 262 645 L 218 645 Z" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" />
+      </g>
+    `
+  },
+
+  // =========================================================================
+  // OUTERWEAR (Layer 45) - Wider Shoulders, Natural Opening, Over Tops & Pants
+  // =========================================================================
+  {
+    id: 'fleece-hoodie',
+    name: 'Cozy Oversized Fleece Hoodie',
+    category: 'tops',
+    layerOrder: 45,
+    price: '$65',
+    defaultColor: '#475569',
+    availableColors: ['#475569', '#1e293b', '#0f172a', '#d97706', '#dc2626', '#059669', '#f8fafc'],
+    render: (color, fit = 'regular') => {
+      const wMod = fit === 'slim' ? 0 : (fit === 'oversized' ? 10 : 5);
+      const hemY = 308;
+      return `
+        <g id="garment-fleece-hoodie" class="garment-group">
+          <!-- Cross-Over Hood -->
+          <path d="M 166 118 C 160 82, 240 82, 234 118 Z" fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.5" />
+          <path d="M 180 120 Q 200 134, 220 120" fill="none" stroke="rgba(0,0,0,0.25)" stroke-width="2" />
+
+          <!-- Main Heavy Body & Sleeves -->
+          <path d="M 166 118
+                   L ${284 + wMod} 136
+                   L ${268 + wMod} 265
+                   L ${246 + wMod} 255
+                   L ${252 + wMod} ${hemY}
+                   C 230 ${hemY + 5}, 170 ${hemY + 5}, ${148 - wMod} ${hemY}
+                   L ${154 - wMod} 255
+                   L ${132 - wMod} 265
+                   L ${116 - wMod} 136
+                   Z"
+                fill="${color}" stroke="rgba(0,0,0,0.25)" stroke-width="1.5" />
+
+          <!-- Kangaroo Pouch Pocket -->
+          <path d="M 162 245 L 238 245 L 244 295 L 156 295 Z" fill="rgba(0,0,0,0.08)" stroke="rgba(0,0,0,0.2)" stroke-width="1.5" />
+
+          <!-- Thick Ribbed Waistband Hem -->
+          <path d="M ${148 - wMod} ${hemY - 10} C 170 ${hemY - 5}, 230 ${hemY - 5}, ${252 + wMod} ${hemY - 10} L ${252 + wMod} ${hemY} C 230 ${hemY + 5}, 170 ${hemY + 5}, ${148 - wMod} ${hemY} Z" 
+                fill="url(#knitRibbing)" opacity="0.5" />
+        </g>
+      `;
+    }
+  },
+  {
+    id: 'leather-biker',
+    name: 'Asymmetric Leather Biker Jacket',
+    category: 'outerwear',
+    layerOrder: 45,
+    price: '$180',
+    defaultColor: '#18181b',
+    availableColors: ['#18181b', '#27272a', '#78350f', '#451a03', '#dc2626'],
+    render: (color, fit = 'regular') => {
+      const wMod = fit === 'slim' ? -2 : (fit === 'oversized' ? 8 : 1);
+      const hemY = 306;
+      return `
+        <g id="garment-leather-biker" class="garment-group">
+          <!-- Main Leather Jacket Silhouette -->
+          <path d="M 164 116
+                   L ${284 + wMod} 136
+                   L ${268 + wMod} 265
+                   L ${248 + wMod} 255
+                   L ${252 + wMod} ${hemY}
+                   C 225 ${hemY + 4}, 175 ${hemY + 4}, ${148 - wMod} ${hemY}
+                   L ${152 - wMod} 255
+                   L ${132 - wMod} 265
+                   L ${116 - wMod} 136
+                   Z"
+                fill="${color}" stroke="rgba(0,0,0,0.4)" stroke-width="1.6" />
+
+          <!-- Pebbled Leather Specular Grain -->
+          <path d="M 164 116 L ${284 + wMod} 136 L ${252 + wMod} ${hemY} L ${148 - wMod} ${hemY} Z" 
+                fill="url(#leatherGrain)" opacity="0.3" />
+
+          <!-- Open V-Neck Revealing Under-Shirt -->
+          <polygon points="174,116 200,210 226,116" fill="none" />
+
+          <!-- Wide Asymmetric Notched Lapels with Metal Snaps -->
+          <polygon points="174,116 190,175 160,165" fill="${color}" stroke="#cbd5e1" stroke-width="1" />
+          <polygon points="226,116 210,175 240,165" fill="${color}" stroke="#cbd5e1" stroke-width="1" />
+          <circle cx="166" cy="162" r="2" fill="#cbd5e1" />
+          <circle cx="234" cy="162" r="2" fill="#cbd5e1" />
+
+          <!-- Diagonal Heavy Metal Zipper -->
+          <line x1="200" y1="210" x2="188" y2="${hemY}" stroke="#94a3b8" stroke-width="3" stroke-dasharray="2,1" />
+
+          <!-- Zippered Waist Pockets -->
+          <line x1="158" y1="265" x2="182" y2="275" stroke="#94a3b8" stroke-width="2" />
+          <line x1="242" y1="265" x2="218" y2="275" stroke="#94a3b8" stroke-width="2" />
+        </g>
+      `;
+    }
+  },
+  {
+    id: 'denim-jacket',
+    name: 'Vintage Trucker Denim Jacket',
+    category: 'outerwear',
+    layerOrder: 45,
+    price: '$95',
+    defaultColor: '#1e40af',
+    availableColors: ['#1e40af', '#1d4ed8', '#1e293b', '#475569', '#f8fafc'],
+    render: (color, fit = 'regular') => {
+      const wMod = fit === 'slim' ? -2 : (fit === 'oversized' ? 8 : 1);
+      const hemY = 298;
+      return `
+        <g id="garment-denim-jacket" class="garment-group">
+          <!-- Trucker Jacket Silhouette -->
+          <path d="M 166 116
+                   L ${284 + wMod} 136
+                   L ${268 + wMod} 265
+                   L ${248 + wMod} 255
+                   L ${252 + wMod} ${hemY}
+                   C 225 ${hemY + 4}, 175 ${hemY + 4}, ${148 - wMod} ${hemY}
+                   L ${152 - wMod} 255
+                   L ${132 - wMod} 265
+                   L ${116 - wMod} 136
+                   Z"
+                fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.5" />
+
+          <!-- Pointed Collars -->
+          <polygon points="174,116 190,135 180,116" fill="${color}" stroke="#d97706" stroke-width="1" />
+          <polygon points="226,116 210,135 220,116" fill="${color}" stroke="#d97706" stroke-width="1" />
+
+          <!-- Dual Button Flap Chest Pockets -->
+          <rect x="160" y="165" width="22" height="24" rx="2" fill="none" stroke="#d97706" stroke-width="1.2" />
+          <circle cx="171" cy="172" r="1.5" fill="#f59e0b" />
+          <rect x="218" y="165" width="22" height="24" rx="2" fill="none" stroke="#d97706" stroke-width="1.2" />
+          <circle cx="229" cy="172" r="1.5" fill="#f59e0b" />
+
+          <!-- Center Button Track -->
+          <line x1="200" y1="135" x2="200" y2="${hemY}" stroke="#d97706" stroke-width="1.2" />
+        </g>
+      `;
+    }
+  },
+  {
+    id: 'trench-coat',
+    name: 'Heritage Double-Breasted Trench',
+    category: 'outerwear',
+    layerOrder: 45,
+    price: '$220',
+    defaultColor: '#d97706',
+    availableColors: ['#d97706', '#1e293b', '#475569', '#f8fafc', '#15803d'],
+    render: (color, fit = 'regular') => {
+      const wMod = fit === 'slim' ? -2 : (fit === 'oversized' ? 8 : 2);
+      const hemY = 460;
+      return `
+        <g id="garment-trench-coat" class="garment-group">
+          <!-- Longline Trench Silhouette down to Y:460 -->
+          <path d="M 166 114
+                   L ${284 + wMod} 136
+                   L ${268 + wMod} 265
+                   L ${250 + wMod} 255
+                   L ${262 + wMod} ${hemY}
+                   C 225 ${hemY + 8}, 175 ${hemY + 8}, ${138 - wMod} ${hemY}
+                   L ${150 - wMod} 255
+                   L ${132 - wMod} 265
+                   L ${116 - wMod} 136
+                   Z"
+                fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.5" />
+
+          <!-- Wide Peak Lapels -->
+          <polygon points="172,116 192,175 160,168" fill="${color}" stroke="rgba(0,0,0,0.25)" stroke-width="1.2" />
+          <polygon points="228,116 208,175 240,168" fill="${color}" stroke="rgba(0,0,0,0.25)" stroke-width="1.2" />
+
+          <!-- Waist Buckle Tie Belt -->
+          <rect x="${144 - wMod}" y="258" width="${112 + wMod * 2}" height="10" rx="2" fill="rgba(0,0,0,0.25)" stroke="rgba(0,0,0,0.35)" stroke-width="1" />
+          <rect x="194" y="256" width="12" height="14" rx="2" fill="#d4af37" />
+
+          <!-- Horn Buttons -->
+          <circle cx="188" cy="205" r="2.5" fill="#451a03" />
+          <circle cx="212" cy="205" r="2.5" fill="#451a03" />
+          <circle cx="188" cy="235" r="2.5" fill="#451a03" />
+          <circle cx="212" cy="235" r="2.5" fill="#451a03" />
+        </g>
+      `;
+    }
+  },
+  {
+    id: 'blazer-double-breasted',
+    name: 'Tailored Double-Breasted Blazer',
+    category: 'outerwear',
+    layerOrder: 45,
+    price: '$145',
+    defaultColor: '#1e293b',
+    availableColors: ['#1e293b', '#0f172a', '#334155', '#475569', '#78350f', '#064e3b', '#4c1d95', '#ffffff'],
+    render: (color, fit = 'regular') => {
+      const wMod = fit === 'slim' ? -2 : (fit === 'oversized' ? 7 : 0);
+      const hemY = 304;
+      return `
+        <g id="garment-blazer-db" class="garment-group">
+          <!-- Main Blazer Body -->
+          <path d="M 166 114
+                   L ${284 + wMod} 136
+                   L ${268 + wMod} 265
+                   L ${250 + wMod} 255
+                   L ${252 + wMod} ${hemY}
+                   C 225 ${hemY + 4}, 175 ${hemY + 4}, ${148 - wMod} ${hemY}
+                   L ${150 - wMod} 255
+                   L ${132 - wMod} 265
+                   L ${116 - wMod} 136
+                   Z"
+                fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.6" />
+
+          <!-- Satin Peak Lapels -->
+          <path d="M 172 116 L 188 178 L 160 172 L 198 245 L 200 245 L 238 172 L 210 178 L 228 116 Z" 
+                fill="rgba(0,0,0,0.22)" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+
+          <!-- Double-Breasted Brass Buttons -->
+          <circle cx="188" cy="225" r="3" fill="#d4af37" stroke="#92400e" stroke-width="0.8" />
+          <circle cx="212" cy="225" r="3" fill="#d4af37" stroke="#92400e" stroke-width="0.8" />
+          <circle cx="188" cy="245" r="3" fill="#d4af37" stroke="#92400e" stroke-width="0.8" />
+          <circle cx="212" cy="245" r="3" fill="#d4af37" stroke="#92400e" stroke-width="0.8" />
+
+          <!-- Welt Pockets -->
+          <line x1="160" y1="262" x2="182" y2="262" stroke="rgba(0,0,0,0.35)" stroke-width="2.5" stroke-linecap="round" />
+          <line x1="218" y1="262" x2="240" y2="262" stroke="rgba(0,0,0,0.35)" stroke-width="2.5" stroke-linecap="round" />
+        </g>
+      `;
+    }
+  },
+  {
+    id: 'puffer-vest',
+    name: 'Quilted Down Puffer Vest',
+    category: 'outerwear',
+    layerOrder: 45,
+    price: '$88',
+    defaultColor: '#0f172a',
+    availableColors: ['#0f172a', '#1e3a8a', '#15803d', '#b91c1c', '#c2410c', '#e2e8f0'],
+    render: (color, fit = 'regular') => {
+      const wMod = fit === 'slim' ? -1 : (fit === 'oversized' ? 8 : 2);
+      const hemY = 298;
+      return `
+        <g id="garment-puffer-vest" class="garment-group">
+          <!-- High Puffer Storm Collar -->
+          <path d="M 174 100 C 185 106, 215 106, 226 100 L 228 116 C 215 120, 185 120, 172 116 Z" 
+                fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.5" />
+
+          <!-- Sleeveless Vest Body -->
+          <path d="M 172 116
+                   C 185 122, 215 122, 228 116
+                   L ${252 + wMod} 136
+                   L ${248 + wMod} 195
+                   L ${250 + wMod} ${hemY}
+                   C 225 ${hemY + 4}, 175 ${hemY + 4}, ${150 - wMod} ${hemY}
+                   L ${152 - wMod} 195
+                   L ${148 - wMod} 136
+                   Z"
+                fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.5" />
+
+          <!-- Horizontal Baffle Quilting Lines -->
+          <path d="M 152 148 Q 200 154, 248 148" fill="none" stroke="rgba(0,0,0,0.3)" stroke-width="2.5" />
+          <path d="M 152 178 Q 200 184, 248 178" fill="none" stroke="rgba(0,0,0,0.3)" stroke-width="2.5" />
+          <path d="M 152 208 Q 200 214, 248 208" fill="none" stroke="rgba(0,0,0,0.3)" stroke-width="2.5" />
+          <path d="M 152 238 Q 200 244, 248 238" fill="none" stroke="rgba(0,0,0,0.3)" stroke-width="2.5" />
+          <path d="M 152 268 Q 200 274, 248 268" fill="none" stroke="rgba(0,0,0,0.3)" stroke-width="2.5" />
+
+          <!-- Center Waterproof Zip Baffle -->
+          <line x1="200" y1="102" x2="200" y2="${hemY}" stroke="rgba(0,0,0,0.4)" stroke-width="3" />
+          <circle cx="200" cy="120" r="2.2" fill="#94a3b8" />
+        </g>
+      `;
+    }
+  },
+
+  // =========================================================================
+  // ACCESSORIES - JEWELRY & BAGS (Layer 55)
+  // =========================================================================
+  {
+    id: 'gold-chain',
+    name: 'Cuban Link Chain Necklace',
+    category: 'accessories',
+    layerOrder: 55,
+    price: '$85',
+    defaultColor: '#d4af37',
+    availableColors: ['#d4af37', '#e2e8f0', '#78350f'],
+    render: (color) => `
+      <g id="garment-gold-chain" class="garment-group">
+        <!-- Choker & Chest Drape Chain around Neck -->
+        <path d="M 184 116 C 185 145, 215 145, 216 116" fill="none" stroke="${color}" stroke-width="3" stroke-dasharray="3,2" stroke-linecap="round" />
+        <circle cx="200" cy="142" r="3" fill="${color}" stroke="#b45309" stroke-width="0.8" />
       </g>
     `
   },
@@ -951,12 +918,81 @@ export const GARMENTS = [
     render: (color) => `
       <g id="garment-crossbody-bag" class="garment-group">
         <!-- Diagonal Heavy Nylon Strap -->
-        <path d="M 160 118 L 246 250" stroke="#09090b" stroke-width="6" stroke-linecap="round" />
+        <path d="M 152 126 L 246 255" stroke="#09090b" stroke-width="6" stroke-linecap="round" />
         <!-- Leather Sling Pouch -->
         <rect x="204" y="215" width="46" height="30" rx="8" transform="rotate(-15 227 230)" fill="${color}" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" />
-        <!-- Metallic Carabiner / Buckle -->
         <circle cx="212" cy="225" r="3" fill="#cbd5e1" stroke="#475569" stroke-width="1" />
         <line x1="210" y1="230" x2="238" y2="222" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" />
+      </g>
+    `
+  },
+
+  // =========================================================================
+  // ACCESSORIES - HEADWEAR & EYEWEAR (Layer 65) - Contoured to Skull Curvature
+  // =========================================================================
+  {
+    id: 'baseball-cap',
+    name: 'Embroidered Dad Cap',
+    category: 'accessories',
+    layerOrder: 65,
+    price: '$25',
+    defaultColor: '#1e293b',
+    availableColors: ['#1e293b', '#dc2626', '#166534', '#1e40af', '#ffffff'],
+    render: (color) => `
+      <g id="garment-baseball-cap" class="garment-group">
+        <!-- Crown Dome (snugly hugging skull curvature Y:24 to Y:54) -->
+        <path d="M 172 52
+                 C 170 24, 230 24, 228 52
+                 Z"
+              fill="${color}" stroke="rgba(0,0,0,0.35)" stroke-width="1.4" />
+        <!-- Top Button -->
+        <circle cx="200" cy="24" r="2.5" fill="rgba(0,0,0,0.3)" />
+
+        <!-- Radial Panel Stitching -->
+        <path d="M 200 25 Q 185 36, 178 52" fill="none" stroke="rgba(0,0,0,0.18)" stroke-width="1" />
+        <path d="M 200 25 Q 215 36, 222 52" fill="none" stroke="rgba(0,0,0,0.18)" stroke-width="1" />
+
+        <!-- Curved Visor/Brim with Forehead Overlap & Depth -->
+        <path d="M 166 50
+                 C 185 45, 215 45, 234 50
+                 C 246 58, 226 62, 200 62
+                 C 174 62, 154 58, 166 50
+                 Z"
+              fill="${color}" stroke="rgba(0,0,0,0.4)" stroke-width="1.4" />
+        <path d="M 170 52 C 185 48, 215 48, 230 52" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.2" />
+
+        <!-- Cast Forehead Drop Shadow -->
+        <ellipse cx="200" cy="58" rx="26" ry="3" fill="rgba(0,0,0,0.3)" />
+      </g>
+    `
+  },
+  {
+    id: 'aviator-shades',
+    name: 'Polarized Aviator Sunglasses',
+    category: 'accessories',
+    layerOrder: 65,
+    price: '$60',
+    defaultColor: '#0f172a',
+    availableColors: ['#0f172a', '#78350f', '#064e3b', '#1e3a8a', '#d4af37'],
+    render: (color) => `
+      <g id="garment-aviator-shades" class="garment-group">
+        <!-- Left Teardrop Lens -->
+        <path d="M 180 58 C 180 50, 196 50, 196 58 C 196 68, 184 70, 180 64 Z" 
+              fill="${color}" fill-opacity="0.88" stroke="#d4af37" stroke-width="1.4" />
+        <path d="M 183 55 L 189 66" stroke="rgba(255,255,255,0.4)" stroke-width="1" />
+
+        <!-- Right Teardrop Lens -->
+        <path d="M 220 58 C 220 50, 204 50, 204 58 C 204 68, 216 70, 220 64 Z" 
+              fill="${color}" fill-opacity="0.88" stroke="#d4af37" stroke-width="1.4" />
+        <path d="M 211 55 L 217 66" stroke="rgba(255,255,255,0.4)" stroke-width="1" />
+
+        <!-- Double Gold Bridge -->
+        <line x1="196" y1="56" x2="204" y2="56" stroke="#d4af37" stroke-width="1.4" />
+        <line x1="196" y1="52" x2="204" y2="52" stroke="#d4af37" stroke-width="1.4" />
+
+        <!-- Temples to Ears -->
+        <line x1="180" y1="56" x2="173" y2="55" stroke="#d4af37" stroke-width="1.4" />
+        <line x1="220" y1="56" x2="227" y2="55" stroke="#d4af37" stroke-width="1.4" />
       </g>
     `
   },
@@ -970,10 +1006,11 @@ export const GARMENTS = [
     availableColors: ['#06b6d4', '#d946ef', '#f59e0b', '#10b981', '#6366f1'],
     render: (color) => `
       <g id="garment-cyber-visor" class="garment-group">
-        <!-- Wraparound Monoshield Visor -->
-        <path d="M 174 58 Q 200 62, 226 58 L 228 69 Q 200 76, 172 69 Z" fill="${color}" opacity="0.85" stroke="rgba(255,255,255,0.6)" stroke-width="1" />
+        <!-- Wraparound Monoshield Visor (over eyes Y:56-68) -->
+        <path d="M 173 56 Q 200 60, 227 56 L 228 67 Q 200 74, 172 67 Z" 
+              fill="${color}" opacity="0.9" stroke="rgba(255,255,255,0.6)" stroke-width="1" />
         <!-- Specular Highlight Strip -->
-        <line x1="178" y1="62" x2="222" y2="62" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" opacity="0.75" />
+        <line x1="178" y1="60" x2="222" y2="60" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" opacity="0.8" />
       </g>
     `
   }
