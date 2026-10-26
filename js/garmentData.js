@@ -854,3 +854,5 @@ export const PRESET_OUTFITS = [
 // Step 21: feat(apparel): calibrate knit ribbing texture overlay for turtleneck cuffs and hem
 
 // Step 22: feat(apparel): define tactical techwear cargo joggers schema
+
+// Step 23: feat(apparel): add articulated knee panel lines to techwear joggers
