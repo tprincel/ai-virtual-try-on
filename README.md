@@ -13,17 +13,20 @@ An interactive, high-fidelity **2D AI Virtual Try-On Studio** engineered with pu
 ## 🌟 Key Features
 
 - **Precision Anatomical Mannequin**: Scalable vector mannequin with realistic proportions (shoulders, chest, waist, hips, and limbs) and customizable skin tone palettes (Fair Ivory, Warm Beige, Sunlit Tan, Rich Bronze, Deep Espresso, Studio Slate).
-- **Proper Garment Alignment & Fitting**: Every garment in the catalog is engineered to wrap and align precisely to the mannequin's anatomical landmarks, eliminating distortion and clipping.
+- **Studio Lighting Atmosphere Engine**: 5 dynamic lighting environments (*Studio Spotlight*, *Cyberpunk Neon*, *Golden Hour Sunset*, *Runway Editorial*, *Midnight Velvet*) with responsive background gradients, ambient rim glows, and dynamic ground shadows.
+- **Web Audio Soundscape Synthesizer**: Native Web Audio API procedural audio effects providing tactile sensory feedback (fabric rustle swoosh, button clicks, camera shutter, and preset sparkle chords) with mute toggle.
+- **Stage Viewport Zoom & Inspection**: Interactive stage toolbar featuring Zoom In/Out/Reset, Idle Breathing Avatar physics, and dynamic 3/4 perspective angle view.
+- **SVG Fabric Texture Shaders**: Micro-textured fabric shaders providing realistic textile depth (denim twill weave, knit ribbing, luxury satin sheen, and pebbled leather specular grain).
+- **Curated Wardrobe Lookbook**: Save, bookmark, and name custom outfit combinations to local storage with one-click re-equipping and management.
+- **Real-Time Wardrobe Search**: Instant text search filtering across garments, fabric types, and colors with instant count updates.
+- **Expanded Luxury & Streetwear Catalog**:
+  - *Tops*: Classic Crewneck, Vintage Graphic Rock Tee, Summer Linen V-Neck, Oversized Skater Tee, Athletic Dry-Fit, Oxford Button-Down, Fleece Hoodie, Merino Wool Turtleneck.
+  - *Outerwear*: Leather Biker, Denim Trucker, Heritage Trench, Tailored Double-Breasted Silk Blazer, Quilted Down Puffer Vest.
+  - *Bottoms*: Slim Jeans, Tailored Chinos, Relaxed Cargo, Bermuda Shorts, Tactical Techwear Cargo Joggers.
+  - *Footwear*: Urban Minimalist Sneakers, Suede Chelsea Boots, Retro Two-Tone High-Top Dunks.
+  - *Accessories*: Baseball Cap, Aviator Shades, Chunky Gold Chain, Designer Crossbody Sling Bag, Mirrored Cyber Visor Glasses.
 - **Dynamic Fit Drape Controls**: Toggle between **Slim**, **Regular**, and **Oversized** fits with real-time silhouette adjustment and fold creep calculations.
-- **Multi-Layer Stacking Engine**: Seamless depth layering for realistic fashion composition:
-  - *Base*: Anatomical mannequin silhouette & contour highlights
-  - *Layer 20*: Tailored bottoms (Jeans, chinos, shorts, cargo pants)
-  - *Layer 30*: Inner tops (Crewnecks, button-down oxfords, hoodies)
-  - *Layer 40*: Outerwear (Trucker denim jackets, leather biker jackets, heritage trench coats)
-  - *Layer 50*: Footwear (Minimalist leather sneakers, suede Chelsea boots)
-  - *Layer 60*: Accessories (Aviator sunglasses, embroidered dad caps, Cuban link chains)
-- **Live Fabric Color Swatching**: Switch fabric colorways dynamically with preserved ambient shading, fold creases, and highlights.
-- **Curated Style Presets & Randomizer**: One-click styling for *Casual Streetwear*, *Smart Casual Elegance*, *Biker Rock Edge*, and *Vintage Trucker*, plus an "Inspire Me" random outfit generator.
+- **Curated Style Presets & Randomizer**: One-click styling for *Casual Streetwear*, *Smart Casual Elegance*, *Biker Rock Edge*, *Vintage Trucker*, *Met Gala High Fashion*, *Tokyo Cyber Techwear*, and *Autumn Merino Minimalist*, plus "Inspire Me" randomizer.
 - **AI Sizing & Fit Advisor**: Integrated calculator providing personalized size recommendations (S, M, L, XL) based on height, weight, and silhouette preferences.
 - **High-Resolution Look Exporter**: Capture and download 800x1400 PNG snapshots of customized outfits for sharing or lookbook creation.
 - **Zero Heavy Assets**: Instant 0-second loading with no bulky 3D files or WebGL lag.
@@ -32,8 +35,9 @@ An interactive, high-fidelity **2D AI Virtual Try-On Studio** engineered with pu
 
 ## 🛠️ Tech Stack
 
-- **Rendering Engine**: Dynamic Scalable Vector Graphics (SVG 1.1 / 2.0) with XML serialization and Canvas 2D export.
-- **Architecture**: Modular ES6 Modules (`TryOnEngine`, `Mannequin`, `GarmentCatalog`, `StudioApp`).
+- **Rendering Engine**: Dynamic Scalable Vector Graphics (SVG 1.1 / 2.0) with XML serialization, filter effects, and Canvas 2D export.
+- **Audio Synthesis**: Procedural Web Audio API sound synthesis without external audio asset downloads.
+- **Architecture**: Modular ES6 Modules (`TryOnEngine`, `Mannequin`, `LightingStudio`, `AudioEffects`, `LookbookManager`, `StageControls`, `StudioApp`).
 - **Styling**: Modern Glassmorphic Dark UI, CSS Custom Properties, and responsive flex/grid layouts.
 - **Exporting**: HTML5 Canvas rendering pipeline for high-res PNG snapshot generation.
 
@@ -44,11 +48,13 @@ An interactive, high-fidelity **2D AI Virtual Try-On Studio** engineered with pu
 Because the studio uses native ES modules (`import`/`export`), it is best run through a local HTTP server:
 
 ### Quick Start with Python
+
 ```powershell
 python -m http.server 8000
 ```
 
 ### Or with Node.js
+
 ```bash
 npm start
 # or
@@ -56,19 +62,26 @@ npx serve -l 8000
 ```
 
 ### Open in Browser
+
 Visit [http://localhost:8000](http://localhost:8000) in any modern web browser (Chrome, Edge, Safari, Firefox).
 
 ---
 
 ## 📁 Project Architecture
 
-```
+```text
 ai-virtual-try-on/
 ├── css/
-│   └── style.css            # Studio dark mode theme, glassmorphic panels & responsive styles
+│   └── style.css            # Studio dark mode theme, glassmorphic panels, toast styles & responsive rules
 ├── js/
-│   ├── garmentData.js       # Anatomical SVG vector garment catalog & preset outfits
-│   ├── mannequin.js         # Anatomical 2D mannequin model with dynamic skin tones
+│   ├── audioEffects.js      # Procedural Web Audio API synthesizer for tactile UI soundscape
+│   ├── fabricShaders.js     # SVG pattern and filter definitions for cloth textures and weaves
+│   ├── garmentData.js       # Anatomical SVG vector garment catalog & curated outfit presets
+│   ├── lightingStudio.js    # Studio lighting modes, backdrop themes, and ambient glow controller
+│   ├── lookbookManager.js   # Local storage outfit persistence, bookmarking, and restoration
+│   ├── mannequin.js         # Anatomical 2D mannequin model with dynamic skin tones & muscle contours
+│   ├── stageControls.js     # Viewport zoom levels, idle breathing animation, and 3/4 perspective angle
+│   ├── toastManager.js      # Non-intrusive animated toast notification feedback system
 │   ├── tryOnEngine.js       # Stacking order, fit drape transformations & scene composer
 │   └── studioApp.js         # UI orchestrator, event bindings, size advisor & snapshot exporter
 ├── index.html               # Main studio atelier application
@@ -81,8 +94,9 @@ ai-virtual-try-on/
 
 ## 👨‍💻 Author
 
-**Princel Tixeira**  
-- GitHub: [@tprincel](https://github.com/tprincel)  
+Princel Tixeira
+
+- GitHub: [@tprincel](https://github.com/tprincel)
 - Email: [princetixeira@gmail.com](mailto:princetixeira@gmail.com)
 
 ---

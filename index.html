@@ -30,14 +30,25 @@
 						<option value="vintage-denim">Vintage Trucker</option>
 						<option value="skater-summer">Skater Summer Vibes</option>
 						<option value="vintage-rocker">Vintage Rocker Edition</option>
+						<option value="met-gala-couture">Met Gala High Fashion</option>
+						<option value="tokyo-techwear">Tokyo Cyber Techwear</option>
+						<option value="autumn-merino">Autumn Merino Minimalist</option>
 					</select>
 
 					<button id="inspire-btn" class="nav-btn" title="Randomize Look">
 						<span>🎲</span> Inspire Me
 					</button>
 
+					<button id="lookbook-btn" class="nav-btn" title="Open Saved Outfits">
+						<span>📖</span> Lookbook
+					</button>
+
 					<button id="advisor-btn" class="nav-btn" title="AI Sizing Advisor">
 						<span>📐</span> Size Advisor
+					</button>
+
+					<button id="audio-toggle-btn" class="nav-btn sound-btn" title="Toggle Sound FX">
+						<span id="audio-icon">🔊</span> Sound
 					</button>
 
 					<button id="snapshot-btn" class="nav-btn primary" title="Download High-Res Snapshot">
@@ -53,12 +64,22 @@
 			<!-- Studio Main Body Workspace -->
 			<main class="studio-body">
 				<!-- Center Interactive Mannequin Stage -->
-				<section class="stage-section">
-					<div class="mannequin-frame">
+				<section id="stage-section" class="stage-section">
+					<!-- Stage Viewport Zoom & Angle Tools -->
+					<div class="stage-viewport-tools">
+						<button id="tool-zoom-in" class="stage-tool-btn" title="Zoom In">➕</button>
+						<button id="tool-zoom-out" class="stage-tool-btn" title="Zoom Out">➖</button>
+						<button id="tool-zoom-reset" class="stage-tool-btn" title="Reset View">🎯</button>
+						<div class="divider-vert" style="height: 14px;"></div>
+						<button id="tool-breathe" class="stage-tool-btn" title="Idle Breathing Animation">🌬️</button>
+						<button id="tool-angle" class="stage-tool-btn" title="Perspective Angle">📐</button>
+					</div>
+
+					<div id="mannequin-frame" class="mannequin-frame">
 						<div id="mannequin-stage-container" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;"></div>
 					</div>
 
-					<!-- Floating Fit & Skin Controls Bar -->
+					<!-- Floating Fit, Skin & Lighting Controls Bar -->
 					<div class="stage-floating-bar">
 						<div class="floating-group">
 							<span class="floating-label">Fit Drape</span>
@@ -73,6 +94,13 @@
 							<span class="floating-label">Skin Tone</span>
 							<div id="skin-swatch-list" class="skin-swatch-list"></div>
 						</div>
+
+						<div class="divider-vert"></div>
+
+						<div class="floating-group">
+							<span class="floating-label">Lighting</span>
+							<div id="lighting-pill-list" class="lighting-swatch-list"></div>
+						</div>
 					</div>
 				</section>
 
@@ -81,6 +109,15 @@
 					<div class="panel-header">
 						<span class="panel-title">Wardrobe Catalog</span>
 						<span id="equipped-count-tag" class="brand-tag">0 Items</span>
+					</div>
+
+					<!-- Wardrobe Search Bar -->
+					<div class="wardrobe-search-box">
+						<div class="search-input-wrapper">
+							<span class="search-icon-symbol">🔍</span>
+							<input id="wardrobe-search" type="text" class="wardrobe-search-input" placeholder="Search pieces, colors, fabrics..." />
+							<button id="search-clear" class="search-clear-btn">&times;</button>
+						</div>
 					</div>
 
 					<!-- Category Tabs -->
@@ -95,9 +132,14 @@
 							<div class="outfit-price-label">Curated Look Total</div>
 							<div id="outfit-total-price" class="outfit-total-price">$0</div>
 						</div>
-						<button id="checkout-btn" class="nav-btn primary" onclick="alert('Look saved! Total: ' + document.getElementById('outfit-total-price').textContent);">
-							Complete Look 🛍️
-						</button>
+						<div style="display: flex; gap: 8px;">
+							<button id="save-look-btn" class="nav-btn" title="Save outfit to Lookbook">
+								⭐ Save
+							</button>
+							<button id="checkout-btn" class="nav-btn primary">
+								Complete Look 🛍️
+							</button>
+						</div>
 					</div>
 				</aside>
 			</main>
@@ -127,6 +169,20 @@
 					</button>
 					<div id="size-recommendation-result"></div>
 				</div>
+			</div>
+		</div>
+
+		<!-- Lookbook Modal -->
+		<div id="lookbook-modal" class="modal-overlay">
+			<div class="modal-box" style="max-width: 520px;">
+				<div class="modal-header">
+					<h3 class="modal-title">📖 Wardrobe Lookbook</h3>
+					<button id="lookbook-close" class="modal-close">&times;</button>
+				</div>
+				<p style="font-size: 13px; color: #94a3b8; margin-bottom: 12px;">
+					Browse your curated outfits. Equip any saved look with one click.
+				</p>
+				<div id="lookbook-content" class="lookbook-grid"></div>
 			</div>
 		</div>
 
