@@ -874,3 +874,5 @@ export const PRESET_OUTFITS = [
 // Step 31: feat(apparel): render heavy diagonal nylon strap and metal carabiner hardware
 
 // Step 32: feat(apparel): define futuristic cyber mirrored visor glasses schema
+
+// Step 33: feat(apparel): render wraparound monoshield visor with specular highlight strip
