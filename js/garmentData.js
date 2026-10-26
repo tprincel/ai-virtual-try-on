@@ -858,3 +858,5 @@ export const PRESET_OUTFITS = [
 // Step 23: feat(apparel): add articulated knee panel lines to techwear joggers
 
 // Step 24: feat(apparel): implement contrast tactical webbing straps on cargo joggers
+
+// Step 25: feat(apparel): render high-capacity bellows cargo pockets with stitch accents
