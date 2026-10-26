@@ -822,3 +822,5 @@ export const PRESET_OUTFITS = [
     }
   }
 ];
+
+// Step 7: feat(apparel): define tailored double-breasted blazer schema and metadata
