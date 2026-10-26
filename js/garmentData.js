@@ -832,3 +832,5 @@ export const PRESET_OUTFITS = [
 // Step 10: feat(apparel): calibrate dual brass buttons for double-breasted blazer
 
 // Step 11: feat(apparel): add tailored welt pocket lines to blazer model
+
+// Step 12: feat(apparel): implement silk sheen gradient overlay on blazer drape
