@@ -844,3 +844,5 @@ export const PRESET_OUTFITS = [
 // Step 16: feat(apparel): add horizontal baffle quilting lines to puffer vest
 
 // Step 17: feat(apparel): render center waterproof zip baffle and metallic puller
+
+// Step 18: feat(apparel): add winter puffer vest colorways including crimson and forest
