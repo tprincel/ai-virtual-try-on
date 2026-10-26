@@ -3,3 +3,4 @@ export class StageControls {
 }
 // zoom methods
 // resetZoom method
+// toggleBreathing method
