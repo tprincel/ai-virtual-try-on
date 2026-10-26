@@ -297,3 +297,5 @@ window.addEventListener('DOMContentLoaded', () => {
 // Step 60: feat(wardrobe): add quick search clear button and zero-results fallback state
 
 // Step 61: feat(ui): add stage toolbar controls for zoom, breathing, and angle
+
+// Step 62: feat(ui): add floating lighting selector pills on stage control bar
