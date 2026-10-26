@@ -299,3 +299,5 @@ window.addEventListener('DOMContentLoaded', () => {
 // Step 61: feat(ui): add stage toolbar controls for zoom, breathing, and angle
 
 // Step 62: feat(ui): add floating lighting selector pills on stage control bar
+
+// Step 63: feat(ui): add sound mute toggle button with dynamic audio icon
