@@ -291,3 +291,5 @@ class StudioApp {
 window.addEventListener('DOMContentLoaded', () => {
   window.studio = new StudioApp();
 });
+
+// Step 59: feat(wardrobe): implement real-time instant search bar for apparel catalog
