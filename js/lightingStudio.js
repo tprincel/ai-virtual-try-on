@@ -2,3 +2,4 @@ export const LIGHTING_PRESETS = [{ id: "studio-spotlight", name: "Studio Spotlig
 export class LightingStudio {}
 // Cyberpunk preset
 // Golden Hour preset
+// Runway preset
