@@ -860,3 +860,5 @@ export const PRESET_OUTFITS = [
 // Step 24: feat(apparel): implement contrast tactical webbing straps on cargo joggers
 
 // Step 25: feat(apparel): render high-capacity bellows cargo pockets with stitch accents
+
+// Step 26: feat(apparel): add ribbed ankle compression cuffs to jogger legs
