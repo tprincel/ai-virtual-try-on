@@ -846,3 +846,5 @@ export const PRESET_OUTFITS = [
 // Step 17: feat(apparel): render center waterproof zip baffle and metallic puller
 
 // Step 18: feat(apparel): add winter puffer vest colorways including crimson and forest
+
+// Step 19: feat(apparel): define merino wool turtleneck sweater schema
