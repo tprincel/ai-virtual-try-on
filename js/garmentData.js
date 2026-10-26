@@ -749,6 +749,233 @@ export const GARMENTS = [
         <circle cx="200" cy="128" r="2.5" fill="${color}" />
       </g>
     `
+  },
+  {
+    id: 'blazer-double-breasted',
+    name: 'Tailored Double-Breasted Blazer',
+    category: 'outerwear',
+    layerOrder: 45,
+    price: '$145',
+    defaultColor: '#1e293b',
+    availableColors: ['#1e293b', '#0f172a', '#334155', '#475569', '#78350f', '#064e3b', '#4c1d95', '#ffffff'],
+    render: (color, fit = 'regular') => {
+      const wMod = fit === 'slim' ? -3 : (fit === 'oversized' ? 7 : 0);
+      const lMod = fit === 'slim' ? -2 : (fit === 'oversized' ? 8 : 0);
+      return `
+        <g id="garment-blazer-db" class="garment-group">
+          <!-- Main Blazer Body -->
+          <path d="M ${166 - wMod * 0.5} 112 
+                   L ${284 + wMod} 132
+                   L ${268 + wMod} 265
+                   L ${250 + wMod} 255
+                   L ${252 + wMod} ${298 + lMod}
+                   C 225 ${303 + lMod}, 175 ${303 + lMod}, ${148 - wMod} ${298 + lMod}
+                   L ${150 - wMod} 255
+                   L ${132 - wMod} 265
+                   L ${116 - wMod} 132
+                   Z" 
+                fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.6" />
+          
+          <!-- Satin Peak Lapels -->
+          <path d="M 172 114 L 188 178 L 160 172 L 198 245 L 200 245 L 238 172 L 210 178 L 228 114 Z" 
+                fill="rgba(0,0,0,0.22)" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+          
+          <!-- Double-Breasted Brass Buttons -->
+          <circle cx="188" cy="225" r="3" fill="#d4af37" stroke="#92400e" stroke-width="0.8" />
+          <circle cx="212" cy="225" r="3" fill="#d4af37" stroke="#92400e" stroke-width="0.8" />
+          <circle cx="188" cy="245" r="3" fill="#d4af37" stroke="#92400e" stroke-width="0.8" />
+          <circle cx="212" cy="245" r="3" fill="#d4af37" stroke="#92400e" stroke-width="0.8" />
+          
+          <!-- Welt Pockets -->
+          <line x1="160" y1="262" x2="182" y2="262" stroke="rgba(0,0,0,0.35)" stroke-width="2.5" stroke-linecap="round" />
+          <line x1="218" y1="262" x2="240" y2="262" stroke="rgba(0,0,0,0.35)" stroke-width="2.5" stroke-linecap="round" />
+          
+          <!-- Silk Sheen Overlay -->
+          <path d="M 166 114 L 200 245 L 148 298 Z" fill="url(#silkSheen)" opacity="0.6" />
+        </g>
+      `;
+    }
+  },
+  {
+    id: 'puffer-vest',
+    name: 'Quilted Down Puffer Vest',
+    category: 'outerwear',
+    layerOrder: 45,
+    price: '$88',
+    defaultColor: '#0f172a',
+    availableColors: ['#0f172a', '#1e3a8a', '#15803d', '#b91c1c', '#c2410c', '#e2e8f0'],
+    render: (color, fit = 'regular') => {
+      const wMod = fit === 'slim' ? -2 : (fit === 'oversized' ? 8 : 2);
+      return `
+        <g id="garment-puffer-vest" class="garment-group">
+          <!-- High Puffer Storm Collar -->
+          <path d="M 174 100 C 185 106, 215 106, 226 100 L 228 116 C 215 120, 185 120, 172 116 Z" 
+                fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.5" />
+          
+          <!-- Sleeveless Vest Body -->
+          <path d="M 172 116 
+                   C 185 122, 215 122, 228 116
+                   L ${250 + wMod} 136
+                   L ${246 + wMod} 190
+                   L ${248 + wMod} 275
+                   C 225 280, 175 280, ${152 - wMod} 275
+                   L ${154 - wMod} 190
+                   L ${150 - wMod} 136
+                   Z" 
+                fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.5" />
+          
+          <!-- Horizontal Baffle Quilting Lines -->
+          <path d="M 152 150 Q 200 156, 248 150" fill="none" stroke="rgba(0,0,0,0.3)" stroke-width="2.5" />
+          <path d="M 153 180 Q 200 186, 247 180" fill="none" stroke="rgba(0,0,0,0.3)" stroke-width="2.5" />
+          <path d="M 153 210 Q 200 216, 247 210" fill="none" stroke="rgba(0,0,0,0.3)" stroke-width="2.5" />
+          <path d="M 152 240 Q 200 246, 248 240" fill="none" stroke="rgba(0,0,0,0.3)" stroke-width="2.5" />
+          
+          <!-- Center Waterproof Zip Baffle -->
+          <line x1="200" y1="102" x2="200" y2="278" stroke="rgba(0,0,0,0.4)" stroke-width="3" />
+          <circle cx="200" cy="120" r="2.2" fill="#94a3b8" />
+        </g>
+      `;
+    }
+  },
+  {
+    id: 'merino-turtleneck',
+    name: 'Merino Wool Turtleneck',
+    category: 'tops',
+    layerOrder: 30,
+    price: '$65',
+    defaultColor: '#f1f5f9',
+    availableColors: ['#f1f5f9', '#0f172a', '#1e293b', '#78350f', '#064e3b', '#831843'],
+    render: (color, fit = 'regular') => {
+      const wMod = fit === 'slim' ? -3 : (fit === 'oversized' ? 6 : 0);
+      return `
+        <g id="garment-merino-turtleneck" class="garment-group">
+          <!-- Rollneck Collar -->
+          <rect x="180" y="94" width="40" height="24" rx="4" fill="${color}" stroke="rgba(0,0,0,0.25)" stroke-width="1.5" />
+          <line x1="180" y1="106" x2="220" y2="106" stroke="rgba(0,0,0,0.18)" stroke-width="1" />
+          
+          <!-- Torso & Sleeves -->
+          <path d="M 180 114 
+                   L ${278 + wMod} 135
+                   L ${260 + wMod} 255
+                   L ${245 + wMod} 250
+                   L ${248 + wMod} 276
+                   C 230 280, 170 280, ${152 - wMod} 276
+                   L ${155 - wMod} 250
+                   L ${140 - wMod} 255
+                   L ${122 - wMod} 135
+                   Z" 
+                fill="${color}" stroke="rgba(0,0,0,0.2)" stroke-width="1.5" />
+          
+          <!-- Knit Ribbing Texture Overlay -->
+          <rect x="180" y="94" width="40" height="24" fill="url(#knitRibbing)" opacity="0.4" />
+          <path d="M 152 268 C 170 272, 230 272, 248 268 L 248 276 C 230 280, 170 280, 152 276 Z" fill="url(#knitRibbing)" opacity="0.6" />
+        </g>
+      `;
+    }
+  },
+  {
+    id: 'techwear-cargo-jogger',
+    name: 'Tactical Techwear Cargo Joggers',
+    category: 'bottoms',
+    layerOrder: 20,
+    price: '$72',
+    defaultColor: '#18181b',
+    availableColors: ['#18181b', '#27272a', '#1e293b', '#365314', '#713f12'],
+    render: (color, fit = 'regular') => {
+      const wMod = fit === 'slim' ? -3 : (fit === 'oversized' ? 7 : 1);
+      return `
+        <g id="garment-tech-jogger" class="garment-group">
+          <!-- Pants Silhouette with Articulated Knees -->
+          <path d="M 150 268 
+                   C 170 272, 230 272, 250 268
+                   L ${258 + wMod} 330
+                   L ${246 + wMod} 480
+                   L ${238 + wMod} 600
+                   L 218 600
+                   L 204 330
+                   L 196 330
+                   L 182 600
+                   L 162 600
+                   L ${154 - wMod} 480
+                   L ${142 - wMod} 330
+                   Z" 
+                fill="${color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.5" />
+          
+          <!-- Tactical Webbing Straps -->
+          <path d="M 144 380 Q 170 410, 160 450" fill="none" stroke="#f59e0b" stroke-width="2.5" />
+          <path d="M 256 380 Q 230 410, 240 450" fill="none" stroke="#f59e0b" stroke-width="2.5" />
+          
+          <!-- Tactical Cargo Bellows Pockets -->
+          <rect x="136" y="385" width="18" height="28" rx="2" fill="rgba(0,0,0,0.25)" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+          <rect x="246" y="385" width="18" height="28" rx="2" fill="rgba(0,0,0,0.25)" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+          
+          <!-- Ribbed Ankle Cuffs -->
+          <rect x="162" y="594" width="20" height="8" rx="2" fill="#09090b" />
+          <rect x="218" y="594" width="20" height="8" rx="2" fill="#09090b" />
+        </g>
+      `;
+    }
+  },
+  {
+    id: 'retro-high-top-sneakers',
+    name: 'Retro Color-Blocked High-Tops',
+    category: 'shoes',
+    layerOrder: 10,
+    price: '$110',
+    defaultColor: '#dc2626',
+    availableColors: ['#dc2626', '#2563eb', '#16a34a', '#0f172a', '#9333ea', '#ea580c'],
+    render: (color) => `
+      <g id="garment-retro-dunks" class="garment-group">
+        <!-- Left High-Top -->
+        <path d="M 152 590 L 176 590 L 178 625 L 180 638 L 138 638 L 144 610 Z" fill="${color}" stroke="rgba(0,0,0,0.25)" stroke-width="1" />
+        <path d="M 148 600 L 172 600 L 174 624 L 144 624 Z" fill="#ffffff" />
+        <!-- Left Rubber Cupsole -->
+        <path d="M 136 634 L 182 634 L 180 642 L 138 642 Z" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" />
+        
+        <!-- Right High-Top -->
+        <path d="M 224 590 L 248 590 L 256 610 L 262 638 L 220 638 L 222 625 Z" fill="${color}" stroke="rgba(0,0,0,0.25)" stroke-width="1" />
+        <path d="M 228 600 L 252 600 L 256 624 L 226 624 Z" fill="#ffffff" />
+        <!-- Right Rubber Cupsole -->
+        <path d="M 218 634 L 264 634 L 262 642 L 220 642 Z" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" />
+      </g>
+    `
+  },
+  {
+    id: 'crossbody-bag',
+    name: 'Designer Crossbody Sling',
+    category: 'accessories',
+    layerOrder: 55,
+    price: '$48',
+    defaultColor: '#18181b',
+    availableColors: ['#18181b', '#78350f', '#064e3b', '#1e3a8a', '#ffffff'],
+    render: (color) => `
+      <g id="garment-crossbody-bag" class="garment-group">
+        <!-- Diagonal Heavy Nylon Strap -->
+        <path d="M 160 118 L 246 250" stroke="#09090b" stroke-width="6" stroke-linecap="round" />
+        <!-- Leather Sling Pouch -->
+        <rect x="204" y="215" width="46" height="30" rx="8" transform="rotate(-15 227 230)" fill="${color}" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" />
+        <!-- Metallic Carabiner / Buckle -->
+        <circle cx="212" cy="225" r="3" fill="#cbd5e1" stroke="#475569" stroke-width="1" />
+        <line x1="210" y1="230" x2="238" y2="222" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" />
+      </g>
+    `
+  },
+  {
+    id: 'cyber-visor-shades',
+    name: 'Cyber Mirrored Visor Shades',
+    category: 'accessories',
+    layerOrder: 65,
+    price: '$42',
+    defaultColor: '#06b6d4',
+    availableColors: ['#06b6d4', '#d946ef', '#f59e0b', '#10b981', '#6366f1'],
+    render: (color) => `
+      <g id="garment-cyber-visor" class="garment-group">
+        <!-- Wraparound Monoshield Visor -->
+        <path d="M 174 58 Q 200 62, 226 58 L 228 69 Q 200 76, 172 69 Z" fill="${color}" opacity="0.85" stroke="rgba(255,255,255,0.6)" stroke-width="1" />
+        <!-- Specular Highlight Strip -->
+        <line x1="178" y1="62" x2="222" y2="62" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" opacity="0.75" />
+      </g>
+    `
   }
 ];
 
@@ -819,6 +1046,41 @@ export const PRESET_OUTFITS = [
       bottoms: { id: 'relaxed-cargo', color: '#3f3f46', fit: 'oversized' },
       shoes: { id: 'chelsea-boots', color: '#1c1917' },
       accessories: { id: 'gold-chain', color: '#d4af37' }
+    }
+  },
+  {
+    id: 'met-gala-couture',
+    name: 'Met Gala High Fashion',
+    description: 'Double-breasted silk blazer layered over crisp oxford with gold chain and chelsea boots.',
+    items: {
+      tops: { id: 'oxford-shirt', color: '#ffffff', fit: 'slim' },
+      outerwear: { id: 'blazer-double-breasted', color: '#1e293b', fit: 'regular' },
+      bottoms: { id: 'chinos', color: '#0f172a', fit: 'slim' },
+      shoes: { id: 'chelsea-boots', color: '#1c1917' },
+      accessories: { id: 'gold-chain', color: '#d4af37' }
+    }
+  },
+  {
+    id: 'tokyo-techwear',
+    name: 'Tokyo Cyber Techwear',
+    description: 'Down puffer vest, tactical jogger, retro dunks, and mirrored cyber visor.',
+    items: {
+      tops: { id: 'dryfit-tee', color: '#18181b', fit: 'regular' },
+      outerwear: { id: 'puffer-vest', color: '#0f172a', fit: 'oversized' },
+      bottoms: { id: 'techwear-cargo-jogger', color: '#18181b', fit: 'regular' },
+      shoes: { id: 'retro-high-top-sneakers', color: '#dc2626' },
+      accessories: { id: 'cyber-visor-shades', color: '#06b6d4' }
+    }
+  },
+  {
+    id: 'autumn-merino',
+    name: 'Autumn Merino Minimalist',
+    description: 'Fine ribbed merino rollneck paired with slim jeans, crossbody sling, and dunks.',
+    items: {
+      tops: { id: 'merino-turtleneck', color: '#f1f5f9', fit: 'regular' },
+      bottoms: { id: 'slim-jeans', color: '#1e293b', fit: 'slim' },
+      shoes: { id: 'retro-high-top-sneakers', color: '#0f172a' },
+      accessories: { id: 'crossbody-bag', color: '#18181b' }
     }
   }
 ];

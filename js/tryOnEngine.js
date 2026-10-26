@@ -5,6 +5,7 @@
 
 import { GARMENTS, PRESET_OUTFITS } from './garmentData.js';
 import { Mannequin } from './mannequin.js';
+import { FABRIC_SHADERS } from './fabricShaders.js';
 
 export class TryOnEngine {
   constructor(canvasContainerId, options = {}) {
@@ -145,6 +146,7 @@ export class TryOnEngine {
           <filter id="garmentShadow" x="-10%" y="-10%" width="120%" height="120%">
             <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="rgba(0,0,0,0.3)" />
           </filter>
+          ${FABRIC_SHADERS}
         </defs>
         ${this.mannequin.getSVGMarkup()}
         <g id="garment-layers" filter="url(#garmentShadow)">
