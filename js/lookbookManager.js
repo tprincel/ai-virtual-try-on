@@ -3,3 +3,4 @@ export class LookbookManager {
 }
 // loadLooks and saveLooks
 // saveCurrentLook method
+// applyLook method
