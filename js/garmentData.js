@@ -870,3 +870,5 @@ export const PRESET_OUTFITS = [
 // Step 29: feat(apparel): calibrate contrast rubber cupsoles and textured tread lines
 
 // Step 30: feat(apparel): define designer leather crossbody sling bag schema
+
+// Step 31: feat(apparel): render heavy diagonal nylon strap and metal carabiner hardware
