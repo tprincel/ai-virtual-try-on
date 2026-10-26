@@ -834,3 +834,5 @@ export const PRESET_OUTFITS = [
 // Step 11: feat(apparel): add tailored welt pocket lines to blazer model
 
 // Step 12: feat(apparel): implement silk sheen gradient overlay on blazer drape
+
+// Step 13: feat(apparel): introduce curated blazer colorways including midnight and emerald
