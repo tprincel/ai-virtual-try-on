@@ -848,3 +848,5 @@ export const PRESET_OUTFITS = [
 // Step 18: feat(apparel): add winter puffer vest colorways including crimson and forest
 
 // Step 19: feat(apparel): define merino wool turtleneck sweater schema
+
+// Step 20: feat(apparel): engineer fold-over rollneck collar for turtleneck sweater
