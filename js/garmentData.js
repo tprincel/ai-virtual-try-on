@@ -850,3 +850,5 @@ export const PRESET_OUTFITS = [
 // Step 19: feat(apparel): define merino wool turtleneck sweater schema
 
 // Step 20: feat(apparel): engineer fold-over rollneck collar for turtleneck sweater
+
+// Step 21: feat(apparel): calibrate knit ribbing texture overlay for turtleneck cuffs and hem
