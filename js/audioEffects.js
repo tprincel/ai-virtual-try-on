@@ -8,6 +8,9 @@ class AudioSynthesizer {
   playClick() {
     if (!this.enabled) return;
   }
+  playShutter() {
+    if (!this.enabled) return;
+  }
   constructor() {
     this.ctx = null;
     this.enabled = true;
