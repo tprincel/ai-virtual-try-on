@@ -838,3 +838,5 @@ export const PRESET_OUTFITS = [
 // Step 13: feat(apparel): introduce curated blazer colorways including midnight and emerald
 
 // Step 14: feat(apparel): define quilted down puffer vest schema and metadata
+
+// Step 15: feat(apparel): engineer high storm collar for down puffer vest
