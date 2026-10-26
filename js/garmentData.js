@@ -842,3 +842,5 @@ export const PRESET_OUTFITS = [
 // Step 15: feat(apparel): engineer high storm collar for down puffer vest
 
 // Step 16: feat(apparel): add horizontal baffle quilting lines to puffer vest
+
+// Step 17: feat(apparel): render center waterproof zip baffle and metallic puller
