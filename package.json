@@ -1,6 +1,6 @@
 {
   "name": "ai-virtual-try-on",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "type": "module",
   "description": "Interactive AI-powered 2D Virtual Try-On Studio with precision anatomical mannequin fitting, live color customization, dynamic fit drape controls, and look export.",
   "main": "index.html",
