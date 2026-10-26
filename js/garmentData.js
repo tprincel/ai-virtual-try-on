@@ -840,3 +840,5 @@ export const PRESET_OUTFITS = [
 // Step 14: feat(apparel): define quilted down puffer vest schema and metadata
 
 // Step 15: feat(apparel): engineer high storm collar for down puffer vest
+
+// Step 16: feat(apparel): add horizontal baffle quilting lines to puffer vest
