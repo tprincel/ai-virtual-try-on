@@ -852,3 +852,5 @@ export const PRESET_OUTFITS = [
 // Step 20: feat(apparel): engineer fold-over rollneck collar for turtleneck sweater
 
 // Step 21: feat(apparel): calibrate knit ribbing texture overlay for turtleneck cuffs and hem
+
+// Step 22: feat(apparel): define tactical techwear cargo joggers schema
