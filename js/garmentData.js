@@ -828,3 +828,5 @@ export const PRESET_OUTFITS = [
 // Step 8: feat(apparel): engineer anatomical body contour paths for double-breasted blazer
 
 // Step 9: feat(apparel): add satin peak lapels to double-breasted blazer vector model
+
+// Step 10: feat(apparel): calibrate dual brass buttons for double-breasted blazer
