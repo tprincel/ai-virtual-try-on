@@ -5,6 +5,9 @@ class AudioSynthesizer {
   playFabricSwoosh() {
     if (!this.enabled) return;
   }
+  playClick() {
+    if (!this.enabled) return;
+  }
   constructor() {
     this.ctx = null;
     this.enabled = true;
