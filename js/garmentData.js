@@ -872,3 +872,5 @@ export const PRESET_OUTFITS = [
 // Step 30: feat(apparel): define designer leather crossbody sling bag schema
 
 // Step 31: feat(apparel): render heavy diagonal nylon strap and metal carabiner hardware
+
+// Step 32: feat(apparel): define futuristic cyber mirrored visor glasses schema
