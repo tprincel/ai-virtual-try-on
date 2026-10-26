@@ -11,6 +11,9 @@ class AudioSynthesizer {
   playShutter() {
     if (!this.enabled) return;
   }
+  playSparkle() {
+    if (!this.enabled) return;
+  }
   constructor() {
     this.ctx = null;
     this.enabled = true;
