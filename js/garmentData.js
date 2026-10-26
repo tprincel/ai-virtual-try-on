@@ -864,3 +864,5 @@ export const PRESET_OUTFITS = [
 // Step 26: feat(apparel): add ribbed ankle compression cuffs to jogger legs
 
 // Step 27: feat(apparel): define retro two-tone high-top dunks sneaker schema
+
+// Step 28: feat(apparel): render articulated leather panels for high-top sneakers
