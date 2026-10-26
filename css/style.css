@@ -515,6 +515,240 @@ body {
   color: #fff;
 }
 
+/* Toast Notification Styles */
+.vto-toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.vto-toast {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  background: rgba(18, 22, 31, 0.92);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  border-radius: var(--radius-md);
+  color: #f8fafc;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 0 15px rgba(99, 102, 241, 0.2);
+  transform: translateY(20px) scale(0.95);
+  opacity: 0;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto;
+}
+
+.vto-toast.visible {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.vto-toast-icon {
+  font-size: 16px;
+}
+
+/* Stage Viewport Tools (Top-Left of Stage) */
+.stage-viewport-tools {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  padding: 4px 8px;
+  z-index: 50;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.stage-tool-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 14px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.stage-tool-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.stage-tool-btn.active {
+  background: var(--accent-primary);
+  color: #fff;
+}
+
+/* Avatar Breathing Animation */
+.mannequin-frame.breathing-active #tryon-viewport {
+  animation: avatarBreathe 4s ease-in-out infinite;
+}
+
+@keyframes avatarBreathe {
+  0%, 100% {
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    transform: scale(1.012) translateY(-4px);
+  }
+}
+
+/* Wardrobe Search Input */
+.wardrobe-search-box {
+  padding: 10px 18px;
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-input-wrapper {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon-symbol {
+  position: absolute;
+  left: 10px;
+  font-size: 13px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.wardrobe-search-input {
+  width: 100%;
+  padding: 7px 12px 7px 30px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: #fff;
+  font-size: 12px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.wardrobe-search-input:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+.search-clear-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px;
+  display: none;
+}
+
+.search-clear-btn:hover {
+  color: #fff;
+}
+
+/* Lighting Preset Selector Pills */
+.lighting-swatch-list {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lighting-pill {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-tertiary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  transition: all 0.2s ease;
+}
+
+.lighting-pill:hover {
+  transform: scale(1.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.lighting-pill.active {
+  border-color: #fff;
+  transform: scale(1.2);
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.6);
+}
+
+/* Lookbook Drawer Cards */
+.lookbook-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 380px;
+  overflow-y: auto;
+  margin-top: 14px;
+  padding-right: 4px;
+}
+
+.lookbook-card {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+}
+
+.lookbook-card:hover {
+  border-color: var(--accent-primary);
+  background: rgba(99, 102, 241, 0.08);
+}
+
+.lookbook-info-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 2px;
+}
+
+.lookbook-info-meta {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.lookbook-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Audio Wave Toggle Indicator */
+.sound-btn.muted {
+  opacity: 0.6;
+}
+
 /* Responsive adjustments */
 @media (max-width: 960px) {
   .studio-body {
@@ -532,5 +766,11 @@ body {
   .stage-floating-bar {
     bottom: 12px;
     padding: 6px 12px;
+    overflow-x: auto;
+    max-width: 95%;
+  }
+  .stage-viewport-tools {
+    top: 10px;
+    left: 10px;
   }
 }
