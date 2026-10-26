@@ -862,3 +862,5 @@ export const PRESET_OUTFITS = [
 // Step 25: feat(apparel): render high-capacity bellows cargo pockets with stitch accents
 
 // Step 26: feat(apparel): add ribbed ankle compression cuffs to jogger legs
+
+// Step 27: feat(apparel): define retro two-tone high-top dunks sneaker schema
